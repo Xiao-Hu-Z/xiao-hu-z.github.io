@@ -8,18 +8,9 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 26 Sep 2021 11:07:01 +0800</lastBuildDate><atom:link href="https://github.com/Xiao-Hu-Z/xiao-hu-z.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>My First Post</title>
-      <link>https://github.com/Xiao-Hu-Z/xiao-hu-z.github.io/posts/my-first-post/</link>
-      <pubDate>Sun, 26 Sep 2021 11:07:01 +0800</pubDate>
-      
-      <guid>https://github.com/Xiao-Hu-Z/xiao-hu-z.github.io/posts/my-first-post/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
+      <title>Go语言基础之map</title>
       <link>https://github.com/Xiao-Hu-Z/xiao-hu-z.github.io/posts/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 26 Sep 2021 11:07:01 +0800</pubDate>
       
       <guid>https://github.com/Xiao-Hu-Z/xiao-hu-z.github.io/posts/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/</guid>
       <description>概述 Go语言中的map(映射、字典)是一种内置的数据结构，它是一个无序的键值对(key:value)集合，底层采用哈希表来实现。
@@ -37,6 +28,15 @@ var m1 = map[int]string{1:&amp;#34;job&amp;#34;,2:&amp;#34;nike&amp;#34;} m2 := 
 mapName[key]=value 注意：
  同一个字典中的每个键都是唯一的。对已经存在的键值赋值：这相当于对已知键值对进行修改  遍历 Go语言中使用for range遍历map，返回的是key和对应的value
 for k,v := range mapName { fmt.</description>
+    </item>
+    
+    <item>
+      <title>My First Post</title>
+      <link>https://github.com/Xiao-Hu-Z/xiao-hu-z.github.io/posts/my-first-post/</link>
+      <pubDate>Sun, 26 Sep 2021 11:07:01 +0800</pubDate>
+      
+      <guid>https://github.com/Xiao-Hu-Z/xiao-hu-z.github.io/posts/my-first-post/</guid>
+      <description></description>
     </item>
     
   </channel>
