@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.44">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #000000; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #000000; -webkit-text-stroke: #000000; min-height: 14.0px}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 12.0px 'PingFang SC'; font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">+++</span></p>
+<p class="p1"><span class="s1">title = "</span><span class="s2">搜索</span><span class="s1">"</span></p>
+<p class="p1"><span class="s1">menu = "main"</span></p>
+<p class="p1"><span class="s1">weight = 30</span></p>
+<p class="p1"><span class="s1">+++</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;style&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>/* </span><span class="s2">手机适配</span><span class="s1"> */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>@media screen and (max-width: 500px) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>.search{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">       </span>padding-right: 25px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>.search input{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">       </span>width: 100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>.search button{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">       </span>display: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">     </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>/* </span><span class="s2">电脑适配</span><span class="s1"> */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>@media screen and (min-width: 500px) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.search{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>width: 500px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.search input{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>width: 444px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>/* </span><span class="s2">通用样式</span><span class="s1"> */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.search{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>margin: auto;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.search input{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>outline: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>border: 2px solid #c05b4d;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>height: 32px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>padding: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.search button{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>outline: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>border: 0px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>height: 56px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width:56px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>position:absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>background-color:#c05b4d ;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>.search .icon{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width: 28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>height: 28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s1">&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;div class="search"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;input type="text" placeholder="</span><span class="s2">请输入搜索内容</span><span class="s1">..." id="search-key" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;button onclick="search()"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;svg t="1583982313567" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1271"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width="200" height="200" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;defs&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;style type="text/css"&gt;&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/defs&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;path d="M694.857143 475.428571q0-105.714286-75.142857-180.857142T438.857143 219.428571 258 294.571429 182.857143 475.428571t75.142857 180.857143T438.857143 731.428571t180.857143-75.142857T694.857143 475.428571z m292.571428 475.428572q0 29.714286-21.714285 51.428571t-51.428572 21.714286q-30.857143 0-51.428571-21.714286l-196-195.428571q-102.285714 70.857143-228 70.857143-81.714286 0-156.285714-31.714286t-128.571429-85.714286-85.714286-128.571428T36.571429 475.428571t31.714285-156.285714 85.714286-128.571428 128.571429-85.714286T438.857143 73.142857t156.285714 31.714286 128.571429 85.714286 85.714285 128.571428T841.142857 475.428571q0 125.714286-70.857143 228l196 196q21.142857 21.142857 21.142857 51.428572z"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>p-id="1272" fill="#ffffff"&gt;&lt;/path&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/svg&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;h1 id="search-tip" style="color: #c05b4d;text-align: center;display: none;"&gt;</span><span class="s2">搜索中，请稍后</span><span class="s1"> ...&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1">&lt;br /&gt;</span></p>
+<p class="p1"><span class="s1">&lt;div id="result"&gt;&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;script type="text/javascript"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// enter</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>window.onload = function() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.onkeydown = function(ev) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>var event = ev || event</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>if (event.keyCode == 13) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>search()</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// search</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>function search() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>key = document.getElementById("search-key").value;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (key === "") {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>return;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("search-key").value = "";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// tip</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("search-tip").innerText = "</span><span class="s2">搜索中，请稍后</span><span class="s1"> ...";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("search-tip").style.display = "block";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// clear</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var el = document.getElementById('result');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var childs = el.childNodes;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>for (var i = childs.length - 1; i &gt;= 0; i--) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>el.removeChild(childs[i]);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// xml</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>xmltext = new XMLHttpRequest;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>xmltext.open("GET", "/index.xml", false);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>xmltext.send();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>resp = xmltext.responseXML;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>items = resp.getElementsByTagName("item");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// search</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var i = 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>haveResult = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>while (i &lt; items.length) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>txt = items[i].getElementsByTagName("title")[0].innerHTML + items[i].getElementsByTagName("description")[0].innerHTML</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>if (txt.indexOf(key) &gt; -1) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>haveResult = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>title = items[i].getElementsByTagName("title")[0].innerHTML;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>link = items[i].getElementsByTagName("link")[0].innerHTML;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>time = items[i].getElementsByTagName("pubDate")[0].innerHTML;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>mark = items[i].getElementsByTagName("description")[0].innerHTML;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>addItem(title, link, time, mark)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>i++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (!haveResult) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>document.getElementById("search-tip").innerText = "</span><span class="s2">搜索完毕，未发现结果</span><span class="s1"> ...";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>document.getElementById("search-tip").style.display = "block";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// add</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>function addItem(title, link, time, mark) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("search-tip").style.display = "none";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>tmpl = "&lt;article class=\"post\" style=\"border-bottom: 1px solid #e6e6e6;\" &gt;" +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>"&lt;header class=\"post-header\"&gt;" +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>"&lt;h1 class=\"post-title\"&gt;&lt;a class=\"post-link\" href=\"" + link + "\" target=\"_blank\"&gt;" + title + "&lt;/a&gt;&lt;/h1&gt;" +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>"&lt;div class=\"post-meta\"&gt;" +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>" &lt;span class=\"post-time\"&gt;" + time + "&lt;/span&gt;" +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>"&lt;/div&gt;" +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>" &lt;/header&gt;" +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>"&lt;div class=\"post-content\"&gt;" +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>"&lt;div class=\"post-summary\"&gt;" + mark + "&lt;/div&gt;" +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>"&lt;div class=\"read-more\"&gt;" +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>"&lt;a href=\"" + link + "\" class=\"read-more-link\" target=\"_blank\"&gt;</span><span class="s2">阅读更多</span><span class="s1">&lt;/a&gt;" +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>"&lt;/div&gt;" +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>" &lt;/div&gt;" +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>"&lt;/article&gt;"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>div = document.createElement("div")</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>div.innerHTML = tmpl;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById('result').appendChild(div)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
+</body>
+</html>

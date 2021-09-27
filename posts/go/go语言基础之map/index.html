@@ -1,96 +1,203 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-    <meta charset="utf-8">
-    <meta name="theme-color" content="#000" />
-    <title>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Go语言基础之map"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@"/>
+
+
+
+  	<meta property="og:title" content="Go语言基础之map &middot; xiaohu blog" />
+  	<meta property="og:site_name" content="xiaohu blog" />
+  	<meta property="og:url" content="https://xiao-hu-z.github.io/posts/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/" />
+
+    
         
-            Go语言基础之map &middot; My New Hugo Site 
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2021-09-26T11:07:01&#43;08:00" />
+
+    
+    
+
+    <title>Go语言基础之map &middot; xiaohu blog</title>
+
+    
+    <meta name="description" content="概述 Go语言中的map(映射、字典)是一种内置的数据结构，它是一个无序的键值对(key:value)集合，底层采用哈希表来实现。
+字声明和初始化 字典声明 字典的声明格式如下：
+var m map[KeyType]ValueType  m是字典的变量名，keyType是键类型，valueType是值类型 一个map里" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/css/nav.css" />
+
+    
+
+    
+
+    
+      
+          <link href="/index.xml" rel="alternate" type="application/rss+xml" title="xiaohu blog" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.87.0" />
+
+    <link rel="canonical" href="https://xiao-hu-z.github.io/posts/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name":  null ,
+        "logo": "https://xiao-hu-z.github.io/images/xiaohu.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name":  null ,
         
-    </title>
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://xiao-hu-z.github.io/images/xiaohu.png",
+            "width": 250,
+            "height": 250
+        }, 
+        
+        "url":  null ,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": "Go语言基础之map",
+    "name": "Go语言基础之map",
+    "wordCount":  111 ,
+    "timeRequired": "PT1M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": "en"
+    },
+    "url": "https://xiao-hu-z.github.io/posts/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/",
+    "datePublished": "2021-09-26T11:07Z",
+    "dateModified": "2021-09-26T11:07Z",
+    
+    
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://xiao-hu-z.github.io/posts/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/"
+    }
+}
+    </script>
+    
+
 
     
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
-        integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
-    
-    
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300&family=Bitter:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
 
-    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/atom.xml" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="">
-    
-    
-    <meta name="description" content="">
     
 
     
-    <meta name="author" content=""></head>
-<body>
-        <div class="container"><div id="navbar" class="pure-menu pure-menu-open pure-menu-horizontal pure-menu-scrollable">
-    <a href="/" class="pure-menu-heading">
-         
-            My New Hugo Site 
-         
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
     </a>
-    <ul class="pure-menu-list">
-        <li class="pure-menu-item">
-            <a href="/posts" class="pure-menu-link">
-                <i class="fa fa-archive"></i>
-                Articles
-            </a>
-        </li>
-        <li class="pure-menu-item">
-            <a href="/tags" class="pure-menu-link">
-                <i class="fas fa-comments"></i>
-                Categories
-            </a>
-        </li>
-        <li class="pure-menu-item">
-            <a href="/about" class="pure-menu-link">
-                <i class="fas fa-smile"></i>
-                About
-            </a>
-        </li>
+    <ul>
+        
+        
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="/about">About me</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="/posts">xiaohu的博客</a>
+            </li>
+        
+        
     </ul>
-    <ul class="pure-menu-list pull-right">
-        
-        
-        
-        
-        
-        <li class="pure-menu-item">
-            <a href="/posts/index.xml" title="Atom Feed" class="pure-menu-link">
-                <i class="fas fa-rss-square"></i>
-                <span class="hide">RSS Feed</span>
-            </a>
-        </li>
-    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="/index.xml">Subscribe</a>
+    
 </div>
-<div class="pure-u-1">
-    <div class="pad">
-    </div>
-</div>
-<div class="pure-g">
+<span class="nav-cover"></span>
 
 
-<div id="content" class="pure-u-1 pure-u-md-3-4 pure-u-sm-1">
-    <div class="pad">
-<div class="date">
-    <time pubdate="2021-09-26">September 26, 2021</time>
-    <span class="author">by </span>
-</div>
+ <div class="site-wrapper">
 
-<article>
-    <h1><a href="http://example.org/posts/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/">Go语言基础之map</a></h1>
-    <div class="tags">
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+      <a class="blog-logo" href="https://xiao-hu-z.github.io/"><img src="/images/xiaohu.png" alt="Home" /></a>
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post posts">
+
+    <header class="post-header">
+        <h1 class="post-title">Go语言基础之map</h1>
+        <small></small>
+
+        <section class="post-meta">
         
-    </div>
-    <h1 id="概述">概述</h1>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <h1 id="概述">概述</h1>
 <p>Go语言中的map(映射、字典)是一种内置的数据结构，它是一个<strong>无序</strong>的键值对(key:value)集合，底层采用哈希表来实现。</p>
 <h1 id="字声明和初始化">字声明和初始化</h1>
 <h2 id="字典声明">字典声明</h2>
@@ -103,7 +210,7 @@
 <p><strong>字典的键类型不能是哪些类型？</strong></p>
 <p>Go语言字典的键类型不可以是函数类型、字典类型和切片类型</p>
 <blockquote>
-<p>**原因：**Go语言规范规定，在键类型的值之间必须施加操作符==和！=。由于函数类型、字典类型和切片类型的值并不支持判等操作，所以字典的键类型不能是这些类型。</p>
+<p>原因：Go语言规范规定，在键类型的值之间必须施加操作符==和！=。由于函数类型、字典类型和切片类型的值并不支持判等操作，所以字典的键类型不能是这些类型。</p>
 </blockquote>
 <p><strong>空字典：</strong></p>
 <ul>
@@ -169,59 +276,78 @@
 <li>key只能是一个，不能是多个，即每次只能删除一个元素</li>
 </ul>
 
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+    
+<section class="share">
+  <h4>Share this posts</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Go%e8%af%ad%e8%a8%80%e5%9f%ba%e7%a1%80%e4%b9%8bmap&nbsp;-&nbsp;xiaohu%20blog&amp;url=https%3a%2f%2fxiao-hu-z.github.io%2fposts%2fgo%2fgo%25E8%25AF%25AD%25E8%25A8%2580%25E5%259F%25BA%25E7%25A1%2580%25E4%25B9%258Bmap%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fxiao-hu-z.github.io%2fposts%2fgo%2fgo%25E8%25AF%25AD%25E8%25A8%2580%25E5%259F%25BA%25E7%25A1%2580%25E4%25B9%258Bmap%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fxiao-hu-z.github.io%2fposts%2fgo%2fgo%25E8%25AF%25AD%25E8%25A8%2580%25E5%259F%25BA%25E7%25A1%2580%25E4%25B9%258Bmap%2f&amp;description=Go%e8%af%ad%e8%a8%80%e5%9f%ba%e7%a1%80%e4%b9%8bmap"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=https%3a%2f%2fxiao-hu-z.github.io%2fposts%2fgo%2fgo%25E8%25AF%25AD%25E8%25A8%2580%25E5%259F%25BA%25E7%25A1%2580%25E4%25B9%258Bmap%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+
+
+  </footer>
 </article>
 
+</main>
+
+
+  <aside class="read-next">
+  
+  
+      <a class="read-next-story prev" style="no-cover" href="/posts/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Btype/">
+          <section class="post">
+              <h2>Go语言基础之type</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">xiaohu blog</a> </section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
     </div>
-</div>
-
-
-                
-<div id="sidebar" class="pure-u-1 pure-u-md-1-4 pure-u-sm-1">
-    <div class="pad">
-        <a name="about"></a>
-        <h3>About Me</h3>
-        <div style="text-align: center;">
-            <img src="" alt="" class="pure-img" />
-            <p><em></em></p>
-        </div>
-
-        <h3>Latest Articles</h3>
-        <div class="pure-menu pure-menu-open">
-            <ul class="pure-menu-list">
-                
-                <li class="pure-menu-item">
-                    <a href="http://example.org/posts/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/" class="pure-menu-link">Go语言基础之map<br>
-                        <small></small>
-                    </a>
-                </li>
-                
-                <li class="pure-menu-item">
-                    <a href="http://example.org/posts/my-first-post/" class="pure-menu-link">My First Post<br>
-                        <small></small>
-                    </a>
-                </li>
-                
-            </ul>
-        </div>
-
-        <h3>Categories</h3>
-        <div style="text-align:center" class="tags">
-            
-        </div>
-    </div> 
-</div> 
-
-                
-            </div><div class="pure-g">
-	<footer class="pure-u-1 pure-u-md-1 pure-u-sm-1">
-		<p>This page and its contents are copyright &copy; 2021,
-			<a href=""></a>.</p>
-		<p><a href="https://github.com/pravin/hugo-theme-prav">Theme Prav</a> by <a href="https://cto.me.uk">Pravin
-				Paratey</a></p>
-	</footer>
-
-	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
-		integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
-		crossorigin="anonymous"></script>
-</div></div></body>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    
+</body>
 </html>
+
