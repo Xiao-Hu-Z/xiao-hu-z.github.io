@@ -1,55 +1,37 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>xiaohu blog</title>
+    <title>Xiaou Blog</title>
     <link>https://xiao-hu-z.github.io/</link>
-    <description>Recent content on xiaohu blog</description>
+    <description>Recent content on Xiaou Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 26 Sep 2021 11:07:01 +0800</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>分类</title>
-      <link>https://xiao-hu-z.github.io/categories/</link>
+      <link>https://xiao-hu-z.github.io/category/</link>
       <pubDate>Sun, 26 Sep 2021 17:07:33 +0000</pubDate>
       
-      <guid>https://xiao-hu-z.github.io/categories/</guid>
+      <guid>https://xiao-hu-z.github.io/category/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Go语言基础之map</title>
-      <link>https://xiao-hu-z.github.io/posts/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/</link>
+      <link>https://xiao-hu-z.github.io/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/</link>
       <pubDate>Sun, 26 Sep 2021 11:07:01 +0800</pubDate>
       
-      <guid>https://xiao-hu-z.github.io/posts/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/</guid>
-      <description>概述 Go语言中的map(映射、字典)是一种内置的数据结构，它是一个无序的键值对(key:value)集合，底层采用哈希表来实现。
-字声明和初始化 字典声明 字典的声明格式如下：
-var m map[KeyType]ValueType  m是字典的变量名，keyType是键类型，valueType是值类型 一个map里所有的键都是唯一的  字典的键类型不能是哪些类型？
-Go语言字典的键类型不可以是函数类型、字典类型和切片类型
- 原因：Go语言规范规定，在键类型的值之间必须施加操作符==和！=。由于函数类型、字典类型和切片类型的值并不支持判等操作，所以字典的键类型不能是这些类型。
- 空字典：
- 仅仅声明、而没有初始化的字典为空字典。空字典是不能存储键值对的。  字典的初始化 1.先声明再初始化：
-var m1 map[int]string m1 = map[int]string{} var m2 map[int]string m2 = map[int]string{1:&amp;#34;job&amp;#34;,2:&amp;#34;nike&amp;#34;} 2.声明同时初始化：
-var m map[int]string = map[int]string{1:&amp;#34;job&amp;#34;,2:&amp;#34;nike&amp;#34;} 3.自动推导类型：
-var m1 = map[int]string{1:&amp;#34;job&amp;#34;,2:&amp;#34;nike&amp;#34;} m2 := map[int]string{1:&amp;#34;job&amp;#34;,2:&amp;#34;nike&amp;#34;} 4.通过make函数创建
-使用make初始化时，会同时分配空间
-//make(map[KeyType]ValueType, [cap]) m := make(map[int]string,10) 字典的几种操作 赋值 格式：
-mapName[key]=value 注意：
- 同一个字典中的每个键都是唯一的。对已经存在的键值赋值：这相当于对已知键值对进行修改  遍历 Go语言中使用for range遍历map，返回的是key和对应的value
-for k,v := range mapName { fmt.</description>
+      <guid>https://xiao-hu-z.github.io/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/</guid>
+      <description>概述 Go语言中的map(映射、字典)是一种内置的数据结构，它是一个无序的键值对(key:value)集合，底层采用哈希表来实现。 字声明和初始</description>
     </item>
     
     <item>
       <title>Go语言基础之type</title>
-      <link>https://xiao-hu-z.github.io/posts/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Btype/</link>
+      <link>https://xiao-hu-z.github.io/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Btype/</link>
       <pubDate>Sun, 26 Sep 2021 11:07:01 +0800</pubDate>
       
-      <guid>https://xiao-hu-z.github.io/posts/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Btype/</guid>
-      <description>定义结构体类型 结构体可用于用户自定义数据类型和进行面向对象编程。
-type Person struct { name string age int sex bool } func (p *Person)Eat(){ fmt.Printf(&amp;#34;%s爱吃西红柿炒鸡蛋\n&amp;#34;,p.name) } func (p *Person)Drink(){ fmt.Printf(&amp;#34;%s爱喝可乐\n&amp;#34;,p.name) } func (p *Person)Sleep(){ fmt.Printf(&amp;#34;%s要睡8个小时\n&amp;#34;,p.name) } func (p *Person)Love(){ fmt.Printf(&amp;#34;%s喜欢\n&amp;#34;,p.name) } 类型别名 type str string str类型与string类型等价
-package main import &amp;#34;fmt&amp;#34; type str string func main () { var myname str = &amp;#34;Ling&amp;#34; fmt.Printf(&amp;#34;%s&amp;#34;,myname) } 定义接口 type Shaper interface { Area() float64 } 接口定义了一个 方法的集合，但是这些方法不包含实现代码，它们是抽象的，接口里也不能包含变量。 注意实现接口可以是结构体类型，也可以是函数类型。
-定义函数类型 当不定义函数类型，传递函数时：
-package main import &amp;#34;fmt&amp;#34; func isOdd(integer int) bool { if integer%2 == 0 { return false } return true } func isEven(integer int) bool { if integer%2 == 0 { return true } return false } func filter(slice []int, f func(int) bool) []int { var result []int for _, value := range slice { if f(value) { result = append(result, value) } } return result } func test(){ slice := []int {1, 2, 3, 4, 5, 7} fmt.</description>
+      <guid>https://xiao-hu-z.github.io/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Btype/</guid>
+      <description>定义结构体类型 结构体可用于用户自定义数据类型和进行面向对象编程。 type Person struct { name string age int sex bool } func (p *Person)Eat(){ fmt.Printf(&amp;#34;%s爱吃西红柿炒</description>
     </item>
     
     <item>
@@ -58,8 +40,7 @@ package main import &amp;#34;fmt&amp;#34; func isOdd(integer int) bool { if inte
       <pubDate>Sun, 20 Oct 2019 17:14:25 +0000</pubDate>
       
       <guid>https://xiao-hu-z.github.io/about/</guid>
-      <description>The programmer, like the poet, works only slightly removed from pure thought-stuff. He builds his castles in the air, from air, creating by exertion of the imagination.
-—— Xiaohu Zhao</description>
+      <description>The programmer, like the poet, works only slightly removed from pure thought-stuff. He builds his castles in the air, from air, creating by exertion of the imagination. —— Xiaohu Zhao</description>
     </item>
     
     <item>
@@ -68,6 +49,43 @@ package main import &amp;#34;fmt&amp;#34; func isOdd(integer int) bool { if inte
       <pubDate>Sun, 20 Oct 2019 17:12:25 +0000</pubDate>
       
       <guid>https://xiao-hu-z.github.io/tags/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://xiao-hu-z.github.io/search/placeholder/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/search/placeholder/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://xiao-hu-z.github.io/top/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/top/about/</guid>
+      <description>The programmer, like the poet, works only slightly removed from pure thought-stuff. He builds his castles in the air, from air, creating by exertion of the imagination.
+—— Xiaohu Zhao</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://xiao-hu-z.github.io/top/books/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/top/books/</guid>
+      <description>Machine learning学习笔记 Coursera 在线课程 Machine learning 笔记讲师: 吴恩达(Andrew Ng) 课程地址：https://www.coursera.org/lear</description>
+    </item>
+    
+    <item>
+      <title>Posts Archive</title>
+      <link>https://xiao-hu-z.github.io/top/archive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/top/archive/</guid>
       <description></description>
     </item>
     

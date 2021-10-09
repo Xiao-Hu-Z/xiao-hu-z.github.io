@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Xiaou Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://xiao-hu-z.github.io/img/home-bg-jeep.jpg">
+    <meta property="twitter:image" content="https://xiao-hu-z.github.io/img/home-bg-jeep.jpg" />
+    
+
+    
+    <meta name="title" content="Go语言基础之type" />
+    <meta property="og:title" content="Go语言基础之type" />
+    <meta property="twitter:title" content="Go语言基础之type" />
+    
+
+    
+    <meta name="description" content="这里是xiaohu的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="这里是xiaohu的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="这里是xiaohu的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="xiaohu Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Go语言基础之type-xiaohu的博客 | xiaohu Blog</title>
+
+    <link rel="canonical" href="/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Btype/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Xiaou Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/archive/">ARCHIVE</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-jeep.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>Go语言基础之type</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                xiaohu
+                             
+                            on 
+                            Sunday, September 26, 2021
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="定义结构体类型">定义结构体类型</h1>
+<p>结构体可用于用户自定义数据类型和进行面向对象编程。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">type</span> Person <span style="color:#8be9fd;font-style:italic">struct</span> {
+        name <span style="color:#8be9fd">string</span>
+        age <span style="color:#8be9fd">int</span>
+        sex <span style="color:#8be9fd">bool</span>
+}
+<span style="color:#8be9fd;font-style:italic">func</span> (p <span style="color:#ff79c6">*</span>Person)<span style="color:#50fa7b">Eat</span>(){
+    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%s爱吃西红柿炒鸡蛋\n&#34;</span>,p.name)
+}
+<span style="color:#8be9fd;font-style:italic">func</span> (p <span style="color:#ff79c6">*</span>Person)<span style="color:#50fa7b">Drink</span>(){
+    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%s爱喝可乐\n&#34;</span>,p.name)
+}
+<span style="color:#8be9fd;font-style:italic">func</span> (p <span style="color:#ff79c6">*</span>Person)<span style="color:#50fa7b">Sleep</span>(){
+    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%s要睡8个小时\n&#34;</span>,p.name)
+}
+<span style="color:#8be9fd;font-style:italic">func</span> (p <span style="color:#ff79c6">*</span>Person)<span style="color:#50fa7b">Love</span>(){
+    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%s喜欢\n&#34;</span>,p.name)
+}
+</code></pre></div><h1 id="类型别名">类型别名</h1>
+<p>type str string
+str类型与string类型等价</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
+
+<span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+
+<span style="color:#8be9fd;font-style:italic">type</span> str <span style="color:#8be9fd">string</span>
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span> () {
+    <span style="color:#8be9fd;font-style:italic">var</span> myname str = <span style="color:#f1fa8c">&#34;Ling&#34;</span>
+    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%s&#34;</span>,myname)
+}
+</code></pre></div><h1 id="定义接口">定义接口</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">type</span> Shaper <span style="color:#8be9fd;font-style:italic">interface</span> {
+    <span style="color:#50fa7b">Area</span>() <span style="color:#8be9fd">float64</span>
+}
+</code></pre></div><p>接口定义了一个 方法的集合，但是这些方法不包含实现代码，它们是抽象的，接口里也不能包含变量。
+注意实现接口可以是<strong>结构体类型</strong>，也可以是<strong>函数类型</strong>。</p>
+<h1 id="定义函数类型">定义函数类型</h1>
+<p>当不定义函数类型，传递函数时：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
+
+<span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">isOdd</span>(integer <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">bool</span> {
+    <span style="color:#ff79c6">if</span> integer<span style="color:#ff79c6">%</span><span style="color:#bd93f9">2</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> {
+        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
+    }
+    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">true</span>
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">isEven</span>(integer <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">bool</span> {
+    <span style="color:#ff79c6">if</span> integer<span style="color:#ff79c6">%</span><span style="color:#bd93f9">2</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> {
+        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">true</span>
+    }
+    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">filter</span>(slice []<span style="color:#8be9fd">int</span>, f <span style="color:#8be9fd;font-style:italic">func</span>(<span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">bool</span>) []<span style="color:#8be9fd">int</span> {
+    <span style="color:#8be9fd;font-style:italic">var</span> result []<span style="color:#8be9fd">int</span>
+    <span style="color:#ff79c6">for</span> _, value <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> slice {
+        <span style="color:#ff79c6">if</span> <span style="color:#50fa7b">f</span>(value) {
+            result = <span style="color:#8be9fd;font-style:italic">append</span>(result, value)
+        }
+    }
+    <span style="color:#ff79c6">return</span> result
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">test</span>(){
+        slice <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd">int</span> {<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">7</span>}
+        fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;slice = &#34;</span>, slice)
+        odd_res <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">filter</span>(slice, isOdd)    <span style="color:#6272a4">// 函数当做值来传递了
+</span><span style="color:#6272a4"></span>        fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Odd elements of slice are: &#34;</span>, odd_res)
+        even_res <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">filter</span>(slice, isEven)  <span style="color:#6272a4">// 函数当做值来传递了
+</span><span style="color:#6272a4"></span>        fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Even elements of slice are: &#34;</span>, even_res)
+}
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
+    <span style="color:#50fa7b">test</span>()
+}
+</code></pre></div><p>当定义函数类型，传递函数时：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
+
+<span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+
+<span style="color:#8be9fd;font-style:italic">type</span> functinTyoe <span style="color:#8be9fd;font-style:italic">func</span>(<span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">bool</span> <span style="color:#6272a4">// 声明了一个函数类型
+</span><span style="color:#6272a4"></span>
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">isOdd</span>(integer <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">bool</span> {
+    <span style="color:#ff79c6">if</span> integer<span style="color:#ff79c6">%</span><span style="color:#bd93f9">2</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> {
+        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
+    }
+    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">true</span>
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">isEven</span>(integer <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">bool</span> {
+    <span style="color:#ff79c6">if</span> integer<span style="color:#ff79c6">%</span><span style="color:#bd93f9">2</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> {
+        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">true</span>
+    }
+    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
+}
+
+<span style="color:#6272a4">// 声明的函数类型在这个地方当做了一个参数
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">filter</span>(slice []<span style="color:#8be9fd">int</span>, f functinTyoe) []<span style="color:#8be9fd">int</span> {
+    <span style="color:#8be9fd;font-style:italic">var</span> result []<span style="color:#8be9fd">int</span>
+    <span style="color:#ff79c6">for</span> _, value <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> slice {
+        <span style="color:#ff79c6">if</span> <span style="color:#50fa7b">f</span>(value) {
+            result = <span style="color:#8be9fd;font-style:italic">append</span>(result, value)
+        }
+    }
+    <span style="color:#ff79c6">return</span> result
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">test</span>(){
+        slice <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd">int</span> {<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">7</span>}
+        fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;slice = &#34;</span>, slice)
+        odd_res <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">filter</span>(slice, isOdd)    <span style="color:#6272a4">// 函数当做值来传递了
+</span><span style="color:#6272a4"></span>        fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Odd elements of slice are: &#34;</span>, odd_res)
+        even_res <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">filter</span>(slice, isEven)  <span style="color:#6272a4">// 函数当做值来传递了
+</span><span style="color:#6272a4"></span>        fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Even elements of slice are: &#34;</span>, even_res)
+}
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
+    <span style="color:#50fa7b">test</span>()
+</code></pre></div>
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="https://xiao-hu-z.github.io"><img src="/img/favicon.png" />Xiaou Blog</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/" data-toggle="tooltip" data-placement="top" title="Go语言基础之map">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+<div id="disqus-comment"></div>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/go" title="go">
+                            go
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Xiaou Blog" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Xiaou Blog 2021
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://xiao-hu-z.github.io">Xiaohu</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+</body>
+</html>
