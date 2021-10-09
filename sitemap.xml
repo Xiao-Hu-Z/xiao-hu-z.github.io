@@ -2,8 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://xiao-hu-z.github.io/tags/helm/</loc>
+    <lastmod>2021-10-09T11:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xiao-hu-z.github.io/2018/04/16/using-helm-to-deploy-to-kubernetes/</loc>
+    <lastmod>2021-10-09T11:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xiao-hu-z.github.io/tags/kubernetes/</loc>
+    <lastmod>2021-10-09T11:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xiao-hu-z.github.io/post/</loc>
+    <lastmod>2021-10-09T11:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xiao-hu-z.github.io/tags/</loc>
+    <lastmod>2021-10-09T11:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xiao-hu-z.github.io/</loc>
+    <lastmod>2021-10-09T11:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://xiao-hu-z.github.io/category/</loc>
     <lastmod>2021-09-26T17:07:33+00:00</lastmod>
+  </url><url>
+    <loc>https://xiao-hu-z.github.io/tags/go/</loc>
+    <lastmod>2021-09-26T11:07:01+08:00</lastmod>
   </url><url>
     <loc>https://xiao-hu-z.github.io/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/</loc>
     <lastmod>2021-09-26T11:07:01+08:00</lastmod>
@@ -11,20 +32,8 @@
     <loc>https://xiao-hu-z.github.io/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Btype/</loc>
     <lastmod>2021-09-26T11:07:01+08:00</lastmod>
   </url><url>
-    <loc>https://xiao-hu-z.github.io/post/</loc>
-    <lastmod>2021-09-26T11:07:01+08:00</lastmod>
-  </url><url>
-    <loc>https://xiao-hu-z.github.io/</loc>
-    <lastmod>2021-09-26T11:07:01+08:00</lastmod>
-  </url><url>
     <loc>https://xiao-hu-z.github.io/about/</loc>
     <lastmod>2019-10-20T17:14:25+00:00</lastmod>
-  </url><url>
-    <loc>https://xiao-hu-z.github.io/tags/go/</loc>
-    <lastmod>2019-10-20T17:12:25+00:00</lastmod>
-  </url><url>
-    <loc>https://xiao-hu-z.github.io/tags/</loc>
-    <lastmod>2019-10-20T17:12:25+00:00</lastmod>
   </url><url>
     <loc>https://xiao-hu-z.github.io/tags/</loc>
     <lastmod>2019-10-20T17:12:25+00:00</lastmod>
@@ -37,10 +46,14 @@
   </url><url>
     <loc>https://xiao-hu-z.github.io/categories/</loc>
   </url><url>
+    <loc>https://xiao-hu-z.github.io/post/wangluo/http%E7%8A%B6%E6%80%81%E7%A0%81/</loc>
+  </url><url>
     <loc>https://xiao-hu-z.github.io/top/archive/</loc>
   </url><url>
     <loc>https://xiao-hu-z.github.io/search/</loc>
   </url><url>
     <loc>https://xiao-hu-z.github.io/top/</loc>
+  </url><url>
+    <loc>https://xiao-hu-z.github.io/tags/%E7%BD%91%E7%BB%9C/</loc>
   </url>
 </urlset>

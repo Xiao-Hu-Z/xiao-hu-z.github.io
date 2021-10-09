@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="关于" />
-    <meta property="og:title" content="关于" />
-    <meta property="twitter:title" content="关于" />
+    <meta name="title" content="http状态码" />
+    <meta property="og:title" content="http状态码" />
+    <meta property="twitter:title" content="http状态码" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="xiaohu Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>关于-xiaohu的博客 | xiaohu Blog</title>
+    <title>http状态码-xiaohu的博客 | xiaohu Blog</title>
 
-    <link rel="canonical" href="/about/">
+    <link rel="canonical" href="/post/wangluo/http%E7%8A%B6%E6%80%81%E7%A0%81/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 
@@ -153,7 +153,7 @@
 
 <style type="text/css">
     header.intro-header {
-        background-image: url('/img/home-bg-jeep.jpg')
+        background-image: url('https://img.zhaohuabing.com/in-post/2018-06-04-introducing-the-istio-v1alpha3-routing-api/background.jpg')
     }
 </style>
 
@@ -165,17 +165,21 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/tags/%E7%BD%91%E7%BB%9C" title="网络">
+                            网络
+                        </a>
+                        
                     </div>
-                    <h1>关于</h1>
+                    <h1>http状态码</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         
                             Posted by 
                             
-                                    Xiaou Blog
+                                xiaohju
                              
                             on 
-                            Sunday, October 20, 2019
+                            Monday, January 1, 0001
                             
                             
                             
@@ -201,8 +205,110 @@
                 post-container">
 
                 
-                <p>The programmer, like the poet, works only slightly removed from pure  thought-stuff. He builds his castles in the air, from air, creating by  exertion of the imagination.</p>
-<p>—— Xiaohu Zhao</p>
+                <p>HTTP状态码**(HTTP Status Code)是用以表示网页服务器超文本传输协议响应状态的3位数字代码。尤其是在 RESTful 大行当道的现在，并不建议使用业务封装的 HTTP 状态码。</p>
+<p>HTTP 状态码主要有以下五大类：</p>
+<ul>
+<li>1xx：信息响应类，表示接收到请求并且继续处理</li>
+<li>2xx：处理成功响应类，表示动作被成功接收、理解和接受</li>
+<li>3xx：重定向响应类，为了完成指定的动作，必须接受进一步处理</li>
+<li>4xx：客户端错误，客户请求包含语法错误或者是不能正确执行</li>
+<li>5xx：服务端错误，服务器不能正确执行一个正确的请求</li>
+</ul>
+<p>详细描述如下：</p>
+<h1 id="1xx">1xx</h1>
+<p>信息性状态码，表示接收的请求正在处理</p>
+<ul>
+<li>100：客户必须继续发出请求</li>
+<li>101：客户要求服务器根据请求转换HTTP协议版本</li>
+</ul>
+<h1 id="2xx">2xx</h1>
+<p>表示服务器成功处理了客户端的请求</p>
+<ul>
+<li>200：表示一切正常，如果非HEAD请求，服务器返回的响应头会有body数据</li>
+<li>201：提示知道新文件的URL</li>
+<li>202：接受和处理、但处理未完成</li>
+<li>203：返回信息不确定或不完整</li>
+<li>204：请求已经成功处理，但是返回的响应报文不包含实体的主体部分。一般在只需要从客户端往服务器发送信息，而不需要返回数据时使用</li>
+<li>205：服务器完成了请求，用户代理必须复位当前已经浏览过的文件</li>
+<li>206：应用于 HTTP 分块下载或断电续传，表示客户端进行了范围请求，响应报文包含由 Content-Range 指定范围的实体内容</li>
+</ul>
+<h1 id="3xx重定向">3xx重定向</h1>
+<p>表示客户端请求的资源发送了变动，需要客户端用新的 URL 重新发送请求获取资源</p>
+<ul>
+<li>300：请求的资源可在多处得到</li>
+<li>301：表示永久重定向，说明请求的资源已经不存在了，需改用新的 URL 再次访问</li>
+<li>302：表示临时重定向，说明请求的资源还在，但暂时需要用另一个 URL 来访问。</li>
+<li>303：建议客户访问其他URL或访问方式</li>
+<li>304：不具有跳转的含义，表示资源未修改，重定向已存在的缓冲文件，也称缓存重定向，用于缓存控制。</li>
+<li>305：请求的资源必须从服务器指定的地址得到</li>
+<li>306：前一版本HTTP中使用的代码，现行版本中不再使用</li>
+<li>307：申明请求的资源临时性删除</li>
+</ul>
+<h1 id="4xx-类状态码">4xx 类状态码</h1>
+<p>表示客户端发送的<strong>报文有误</strong>，服务器无法处理，也就是错误码的含义</p>
+<ul>
+<li>
+<p>400 Bad Request ：请求报文中存在语法错误。</p>
+</li>
+<li>
+<p>401 Unauthorized ：该状态码表示发送的请求需要有认证信息（BASIC 认证、DIGEST 认证）。如果之前已进行过一次请求，则表示用户认证失败。</p>
+</li>
+<li>
+<p>403 Forbidden ：表示服务器禁止访问资源，并不是客户端的请求出错</p>
+</li>
+<li>
+<p>404 Not Found：表示请求的资源在服务器上不存在或未找到，所以无法提供给客户</p>
+</li>
+<li>
+<p>405：用户在Request-Line字段定义的方法不允许</p>
+</li>
+<li>
+<p>406：根据用户发送的Accept拖，请求资源不可访问</p>
+</li>
+<li>
+<p>407：类似401，用户必须首先在代理服务器上得到授权</p>
+</li>
+<li>
+<p>408：客户端没有在用户指定的时间内完成请求</p>
+</li>
+<li>
+<p>409：对当前资源状态，请求不能完成</p>
+</li>
+<li>
+<p>410：服务器上不再有此资源且无进一步的参考地址</p>
+</li>
+<li>
+<p>411：服务器拒绝用户定义的Content-Length属性请求</p>
+</li>
+<li>
+<p>412：一个或多个请求头字段在当前请求中错误</p>
+</li>
+<li>
+<p>413：请求的资源大于服务器允许的大小</p>
+</li>
+<li>
+<p>414：请求的资源URL长于服务器允许的长度</p>
+</li>
+<li>
+<p>415：请求资源不支持请求项目格式</p>
+</li>
+<li>
+<p>416：请求中包含Range请求头字段，在当前请求资源范围内没有range指示值，请求也不包含If-Range请求头字段</p>
+</li>
+<li>
+<p>417：服务器不满足请求Expect头字段指定的期望值，如果是代理服务器，可能是下一级服务器不能满足请求</p>
+</li>
+</ul>
+<h1 id="5xx-类状态码"><code>5xx</code> 类状态码</h1>
+<p>表示客户端请求报文正确，但是<strong>服务器处理时内部发生了错误</strong>，属于服务器端的错误码</p>
+<ul>
+<li><strong>500 Internal Server Error</strong> ：服务器正在执行请求时发生错误。</li>
+<li>501：服务器不支持请求的函数</li>
+<li>502：服务器暂时不可用，有时是为了防止发生系统过载</li>
+<li><strong>503 Service Unavailable</strong> ：服务器暂时处于超负载或正在进行停机维护，现在无法处理请求</li>
+<li>504：关口过载，服务器使用另一个关口或服务来响应用户，等待时间设定值较长</li>
+<li>505：服务器不支持或拒绝支请求头中指定的HTTP版本</li>
+</ul>
 
 
                 
@@ -250,14 +356,9 @@
                 <hr>
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/tags/" data-toggle="tooltip" data-placement="top" title="标签">&larr;
-                            Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/category/" data-toggle="tooltip" data-placement="top" title="分类">Next
+                        <a href="/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Btype/" data-toggle="tooltip" data-placement="top" title="Go语言基础之type">Next
                             Post &rarr;</a>
                     </li>
                     
