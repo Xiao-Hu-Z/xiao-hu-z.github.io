@@ -6,16 +6,7 @@
     <description>Recent content in Go on Xiaou Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 26 Sep 2021 11:07:01 +0800</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Go语言基础之map</title>
-      <link>https://xiao-hu-z.github.io/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/</link>
-      <pubDate>Sun, 26 Sep 2021 11:07:01 +0800</pubDate>
-      
-      <guid>https://xiao-hu-z.github.io/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Bmap/</guid>
-      <description>概述 Go语言中的map(映射、字典)是一种内置的数据结构，它是一个无序的键值对(key:value)集合，底层采用哈希表来实现。 字声明和初始</description>
-    </item>
-    
+    <lastBuildDate>Sun, 20 Oct 2019 17:12:25 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>标签</title>
       <link>https://xiao-hu-z.github.io/tags/</link>
