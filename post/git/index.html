@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="" />
-    <meta property="og:title" content="" />
-    <meta property="twitter:title" content="" />
+    <meta name="title" content="git &amp; icode" />
+    <meta property="og:title" content="git &amp; icode" />
+    <meta property="twitter:title" content="git &amp; icode" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="xiaohu Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>xiaohu的博客 | xiaohu Blog</title>
+    <title>git &amp; icode-xiaohu的博客 | xiaohu Blog</title>
 
-    <link rel="canonical" href="/search/placeholder/">
+    <link rel="canonical" href="/post/git/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 
@@ -153,7 +153,7 @@
 
 <style type="text/css">
     header.intro-header {
-        background-image: url('/img/home-bg-jeep.jpg')
+        background-image: url('https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg')
     }
 </style>
 
@@ -165,17 +165,21 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/tags/git" title="Git">
+                            Git
+                        </a>
+                        
                     </div>
-                    <h1></h1>
+                    <h1>git &amp; icode</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         
                             Posted by 
                             
-                                    Xiaou Blog
+                                xiaohu
                              
                             on 
-                            Monday, January 1, 0001
+                            Saturday, October 9, 2021
                             
                             
                             
@@ -201,7 +205,77 @@
                 post-container">
 
                 
-                
+                <h1 id="git">Git</h1>
+<p>
+  <img src="./pic/Git%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4%e9%80%9f%e6%9f%a5%e8%a1%a8.png" alt="Git常用命令速查表">
+
+</p>
+<h2 id="git的相关术语">Git的相关术语</h2>
+<p>![image2020-8-26_15-52-14](/Users/zhaoxiaohu01/Documents/learning/学习笔记/linux &amp; git/pic/image2020-8-26_15-52-14.png)</p>
+<ul>
+<li>
+<p>工作区（workspace）</p>
+<p>程序员进行开发改动的地方，是你当前看到的，也是最新的。平常我们开发就是拷贝远程仓库中的一个分支，基于该分支进行开发。在开发过程中就是对工作区的操作。</p>
+</li>
+<li>
+<p>暂存区(index)</p>
+<p>.git目录下的index文件, 暂存区会记录 git add 添加文件的相关信息(文件名、大小、timestamp…)，不保存文件实体, 通过id指向每个文件实体。可以使用  git status  查看暂存区的状态。暂存区标记了你当前工作区中，哪些内容是被git管理的。当你完成某个需求或功能后需要提交到远程仓库，那么第一步就是通过 git  add 先提交到暂存区，被git管理。</p>
+</li>
+<li>
+<p>本地仓库(repository)：</p>
+<p>保存了对象被提交 过的各个版本，比起工作区和暂存区的内容，它要更旧一些。git commit 后同步index的目录树到本地仓库，方便从下一步通过 git push 同步本地仓库与远程仓库的同步。</p>
+</li>
+<li>
+<p>远程仓库(remote)：</p>
+<p>远程仓库的内容可能被分布在多个地点的处于协作关系的本地仓库修改，因此它可能与本地仓库同步，也可能不同步，但是它的内容是最旧的。</p>
+</li>
+</ul>
+<h2 id="git基本命令">Git基本命令</h2>
+<p>初次提交</p>
+<pre><code>git add 文件
+git commit -m &quot;说明&quot;
+git push origin HEAD:refs/for/master
+</code></pre><p>修改后提交</p>
+<pre><code>git add 文件
+git commit --amend
+git push origin HEAD:refs/for/master
+</code></pre><p>删除：</p>
+<pre><code>git add/rm 文件
+git commit -m &quot;说明&quot;
+git push origin HEAD:refs/for/master
+</code></pre><p>创建分支：git branch dev</p>
+<p>切换分支：git checkout dev</p>
+<p>创建并切换分支：git checkout -b dev</p>
+<p><strong>版本之间的diff</strong></p>
+<p>查看简单的diff结果，可以加上–stat参数，执行命令如下：</p>
+<blockquote>
+<pre><code>git diff --stat
+</code></pre></blockquote>
+<p>比较上次提交commit和上上次提交的差别时，执行如下命令：</p>
+<blockquote>
+<pre><code>git diff HEAD^ HEAD
+</code></pre></blockquote>
+<p><strong>查看创建的提交的更改信息</strong></p>
+<pre><code>git log
+</code></pre><p>拉去远端分支：git pull origin 分支名</p>
+<p>撤销已经被放入暂存区的文件：<strong>git reset HEAD 文件</strong></p>
+<p>问题1：</p>
+<p>error: cannot pull with rebase: You have unstaged changes.</p>
+<p>error: please commit or stash them.</p>
+<p>git stash #可用来暂存当前正在进行的工作
+git pull –rebase #在一个随机创建的分支上处理冲突，避免了直接污染原来的分区
+git stash pop #从Git栈中读取最近一次保存的内容</p>
+<h1 id="icode">icode</h1>
+<p>注意点：</p>
+<ul>
+<li>上线后不能提代码，要先取消上线</li>
+<li>CR+2分后不能在原有的基础上继续提交代码，提交代码git commit -m &ldquo;卡片id&rdquo;</li>
+<li>CR+2分后会自动出发branch流水线</li>
+<li>没加final_commit，需要在change流水线手动触发xstp环境部署,false改为true</li>
+<li>qtest提测只需要执行一次</li>
+<li>上线时，首先观察版本diff</li>
+</ul>
+
 
                 
                 
@@ -248,6 +322,16 @@
                 <hr>
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/post/wangluo/http%E7%8A%B6%E6%80%81%E7%A0%81/" data-toggle="tooltip" data-placement="top" title="http状态码">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/04/16/using-helm-to-deploy-to-kubernetes/" data-toggle="tooltip" data-placement="top" title="Helm介绍">Next
+                            Post &rarr;</a>
+                    </li>
                     
                 </ul>
                 

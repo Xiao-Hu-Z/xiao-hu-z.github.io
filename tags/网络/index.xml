@@ -13,7 +13,7 @@
       <pubDate>Sat, 09 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://xiao-hu-z.github.io/post/wangluo/http%E7%8A%B6%E6%80%81%E7%A0%81/</guid>
-      <description>HTTP状态码**(HTTP Status Code)是用以表示网页服务器超文本传输协议响应状态的3位数字代码。尤其是在 RESTful 大行当道的现在，并不建议使用业务</description>
+      <description>HTTP状态码(HTTP Status Code)是用以表示网页服务器超文本传输协议响应状态的3位数字代码。尤其是在 RESTful 大行当道的现在，并不建议使用业务封装</description>
     </item>
     
   </channel>
