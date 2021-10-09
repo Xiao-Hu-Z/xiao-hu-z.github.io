@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>http状态码</title>
+      <link>https://xiao-hu-z.github.io/post/wangluo/http%E7%8A%B6%E6%80%81%E7%A0%81/</link>
+      <pubDate>Sat, 09 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/wangluo/http%E7%8A%B6%E6%80%81%E7%A0%81/</guid>
+      <description>HTTP状态码**(HTTP Status Code)是用以表示网页服务器超文本传输协议响应状态的3位数字代码。尤其是在 RESTful 大行当道的现在，并不建议使用业务</description>
+    </item>
+    
+    <item>
       <title>分类</title>
       <link>https://xiao-hu-z.github.io/category/</link>
       <pubDate>Sun, 26 Sep 2021 17:07:33 +0000</pubDate>
@@ -87,15 +96,6 @@
       
       <guid>https://xiao-hu-z.github.io/top/books/</guid>
       <description>Machine learning学习笔记 Coursera 在线课程 Machine learning 笔记讲师: 吴恩达(Andrew Ng) 课程地址：https://www.coursera.org/lear</description>
-    </item>
-    
-    <item>
-      <title>http状态码</title>
-      <link>https://xiao-hu-z.github.io/post/wangluo/http%E7%8A%B6%E6%80%81%E7%A0%81/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://xiao-hu-z.github.io/post/wangluo/http%E7%8A%B6%E6%80%81%E7%A0%81/</guid>
-      <description>HTTP状态码**(HTTP Status Code)是用以表示网页服务器超文本传输协议响应状态的3位数字代码。尤其是在 RESTful 大行当道的现在，并不建议使用业务</description>
     </item>
     
     <item>
