@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="" />
-    <meta property="og:title" content="" />
-    <meta property="twitter:title" content="" />
+    <meta name="title" content="linux——sed命令解析" />
+    <meta property="og:title" content="linux——sed命令解析" />
+    <meta property="twitter:title" content="linux——sed命令解析" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="xiaohu Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>xiaohu的博客 | xiaohu Blog</title>
+    <title>linux——sed命令解析-xiaohu的博客 | xiaohu Blog</title>
 
-    <link rel="canonical" href="/search/placeholder/">
+    <link rel="canonical" href="/post/linuxsed%E5%91%BD%E4%BB%A4%E8%A7%A3%E6%9E%90/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 
@@ -153,7 +153,7 @@
 
 <style type="text/css">
     header.intro-header {
-        background-image: url('/img/home-bg.jpg')
+        background-image: url('https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg')
     }
 </style>
 
@@ -165,14 +165,18 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/tags/linux" title="Linux">
+                            Linux
+                        </a>
+                        
                     </div>
-                    <h1></h1>
+                    <h1>linux——sed命令解析</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         
                             Posted by 
                             
-                                    Xiaou Blog
+                                xiaohu
                              
                             on 
                             Monday, January 1, 0001
@@ -201,7 +205,60 @@
                 post-container">
 
                 
-                
+                <h1 id="sed介绍">sed介绍</h1>
+<p>sed 全名为 stream editor，流编辑器，用程序的方式来编辑文本，功能相当的强大。是贝尔实验室的 Lee E.McMahon 在 1973 年到 1974 年之间开发完成，目前可以在大多数操作系统中使用，sed 的出现作为 grep 的继任者。与vim等编辑器不同，sed 是一种非交互式编辑器(即用户不必参与编辑过程)，它使用预先设定好的编辑指令对输入的文本进行编辑，完成之后再输出编辑结构。sed 基本上就是在玩正则模式匹配，所以，玩sed的人，正则表达式一般都比较强。</p>
+<blockquote>
+<p>简单描述一下正则表达式的匹配过程，就是拿正则表达式所表示的字符串去和原文字符串内容去匹配，直到匹配到原文内容字符串中的一个完整子串就表示匹配成功。举个例子，有一行文件内容&quot;this is better desk&quot;，这里用&quot;esk&quot;去匹配，匹配过程是这样的：首先拿e去匹配文件行内容，从this开始，直到better的e，第一个字符匹配成功，接着s去匹配better字符e后边的t字符，没有匹配成功；然后重新拿esk中的e去和better的第二个t去匹配，没有成功，接着原始内容的下一个字符，直到desk中的e字符，逐个匹配s，k字符，到此为止，esk成功匹配，正则表达式匹配完毕，整个过程就是这样，即使再复杂的正则表达式的匹配过程也是按照此过程来进行的。</p>
+</blockquote>
+<h1 id="sed工作原理">sed工作原理</h1>
+<p>sed会一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，成为&quot;模式空间&quot;，接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出。</p>
+<h1 id="sed命令解析">sed命令解析</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sed选项与参数：
+-n ：使用安静<span style="color:#ff79c6">(</span>silent<span style="color:#ff79c6">)</span>模式。在一般 sed 的用法中，所有来自 STDIN 的数据一般都会被列出到终端上。但如果加上 -n 参数后，则只有经过sed 特殊处理的那一行<span style="color:#ff79c6">(</span>或者动作<span style="color:#ff79c6">)</span>才会被列出来。
+-e ：直接在命令列模式上进行 sed 的动作编辑；
+-f ：直接将 sed 的动作写在一个文件内， -f filename 则可以运行 filename 内的 sed 动作；
+-r ：sed 的动作支持的是延伸型正规表示法的语法。<span style="color:#ff79c6">(</span>默认是基础正规表示法语法<span style="color:#ff79c6">)</span>
+-i ：直接修改读取的文件内容，而不是输出到终端。
+ 
+动作说明： <span style="color:#ff79c6">[</span>n1<span style="color:#ff79c6">[</span>,n2<span style="color:#ff79c6">]]</span><span style="color:#ff79c6">function</span>
+n1, n2 ：不见得会存在，一般代表『选择进行动作的行数』，举例来说，如果我的动作是需要在 <span style="color:#bd93f9">10</span> 到 <span style="color:#bd93f9">20</span> 行之间进行的，则『 10,20<span style="color:#ff79c6">[</span>动作行为<span style="color:#ff79c6">]</span> 』
+ 
+<span style="color:#ff79c6">function</span>：
+a ：新增， a 的后面可以接字串，而这些字串会在新的一行出现<span style="color:#ff79c6">(</span>目前的下一行<span style="color:#ff79c6">)</span>～
+c ：取代， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行！
+d ：删除，因为是删除啊，所以 d 后面通常不接任何咚咚；
+i ：插入， i 的后面可以接字串，而这些字串会在新的一行出现<span style="color:#ff79c6">(</span>目前的上一行<span style="color:#ff79c6">)</span>；
+p ：列印，亦即将某个选择的数据印出。通常 p 会与参数 sed -n 一起运行～
+s ：取代，可以直接进行取代的工作哩！通常这个 s 的动作可以搭配正规表示法！例如 1,20s/old/new/g 就是啦！
+</code></pre></div><p>sed -i 就是直接对文本文件进行操作的</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sed <span style="color:#ff79c6">-</span>i <span style="color:#f1fa8c">&#39;s/原字符串/新字符串/&#39;</span> <span style="color:#ff79c6">/</span>home<span style="color:#ff79c6">/</span><span style="color:#bd93f9">1.</span>txt
+sed <span style="color:#ff79c6">-</span>i <span style="color:#f1fa8c">&#39;s/原字符串/新字符串/g&#39;</span> <span style="color:#ff79c6">/</span>home<span style="color:#ff79c6">/</span><span style="color:#bd93f9">1.</span>txt
+</code></pre></div><p>1.txt的内容:</p>
+<pre><code>#cat 1.txt
+d
+ddd
+#ff
+</code></pre><p>执行这两条命令的区别:</p>
+<pre><code>sed -i 's/d/7523/' /home/1.txt
+执行结果
+7523
+7523dd
+#ff
+
+sed -i 's/d/7523/g' /home/1.txt
+执行结果
+7523
+752375237523
+#ff
+</code></pre><p><strong>去掉 “行首” 带“@”的首字母@</strong></p>
+<pre><code>sed -i 's/^@//' file
+</code></pre><p><strong>特定字符串的行前插入新行</strong></p>
+<pre><code>sed -i '/特定字符串/i 新行字符串' file
+</code></pre><p><strong>特定字符串的行后插入新行</strong></p>
+<pre><code>sed -i '/特定字符串/a 新行字符串' file
+</code></pre><p><strong>特定字符串的删除</strong></p>
+<pre><code>sed -i '/字符串/d' file
+</code></pre>
 
                 
                 
@@ -248,6 +305,11 @@
                 <hr>
                 <ul class="pager">
                     
+                    
+                    <li class="next">
+                        <a href="/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8Btype/" data-toggle="tooltip" data-placement="top" title="Go语言基础之type">Next
+                            Post &rarr;</a>
+                    </li>
                     
                 </ul>
                 
