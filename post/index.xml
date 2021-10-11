@@ -52,14 +52,5 @@
       <description>定义结构体类型 结构体可用于用户自定义数据类型和进行面向对象编程。 type Person struct { name string age int sex bool } func (p *Person)Eat(){ fmt.Printf(&amp;#34;%s爱吃西红柿炒</description>
     </item>
     
-    <item>
-      <title>linux——sed命令解析</title>
-      <link>https://xiao-hu-z.github.io/post/linuxsed%E5%91%BD%E4%BB%A4%E8%A7%A3%E6%9E%90/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://xiao-hu-z.github.io/post/linuxsed%E5%91%BD%E4%BB%A4%E8%A7%A3%E6%9E%90/</guid>
-      <description>sed介绍 sed 全名为 stream editor，流编辑器，用程序的方式来编辑文本，功能相当的强大。是贝尔实验室的 Lee E.McMahon 在 1973 年到 1974 年之间开发完成，目前可以在大</description>
-    </item>
-    
   </channel>
 </rss>
