@@ -205,127 +205,132 @@
                 post-container">
 
                 
-                <h1 id="定义结构体类型">定义结构体类型</h1>
+                
+
+<h1 id="定义结构体类型">定义结构体类型</h1>
+
 <p>结构体可用于用户自定义数据类型和进行面向对象编程。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">type</span> Person <span style="color:#8be9fd;font-style:italic">struct</span> {
-        name <span style="color:#8be9fd">string</span>
-        age <span style="color:#8be9fd">int</span>
-        sex <span style="color:#8be9fd">bool</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Person</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>
+        <span style="color:#a6e22e">age</span> <span style="color:#66d9ef">int</span>
+        <span style="color:#a6e22e">sex</span> <span style="color:#66d9ef">bool</span>
 }
-<span style="color:#8be9fd;font-style:italic">func</span> (p <span style="color:#ff79c6">*</span>Person)<span style="color:#50fa7b">Eat</span>(){
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%s爱吃西红柿炒鸡蛋\n&#34;</span>,p.name)
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span>)<span style="color:#a6e22e">Eat</span>(){
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s爱吃西红柿炒鸡蛋\n&#34;</span>,<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">name</span>)
 }
-<span style="color:#8be9fd;font-style:italic">func</span> (p <span style="color:#ff79c6">*</span>Person)<span style="color:#50fa7b">Drink</span>(){
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%s爱喝可乐\n&#34;</span>,p.name)
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span>)<span style="color:#a6e22e">Drink</span>(){
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s爱喝可乐\n&#34;</span>,<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">name</span>)
 }
-<span style="color:#8be9fd;font-style:italic">func</span> (p <span style="color:#ff79c6">*</span>Person)<span style="color:#50fa7b">Sleep</span>(){
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%s要睡8个小时\n&#34;</span>,p.name)
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span>)<span style="color:#a6e22e">Sleep</span>(){
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s要睡8个小时\n&#34;</span>,<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">name</span>)
 }
-<span style="color:#8be9fd;font-style:italic">func</span> (p <span style="color:#ff79c6">*</span>Person)<span style="color:#50fa7b">Love</span>(){
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%s喜欢\n&#34;</span>,p.name)
-}
-</code></pre></div><h1 id="类型别名">类型别名</h1>
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Person</span>)<span style="color:#a6e22e">Love</span>(){
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s喜欢\n&#34;</span>,<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">name</span>)
+}</code></pre></div>
+<h1 id="类型别名">类型别名</h1>
+
 <p>type str string
 str类型与string类型等价</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
 
-<span style="color:#8be9fd;font-style:italic">type</span> str <span style="color:#8be9fd">string</span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span> () {
-    <span style="color:#8be9fd;font-style:italic">var</span> myname str = <span style="color:#f1fa8c">&#34;Ling&#34;</span>
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%s&#34;</span>,myname)
-}
-</code></pre></div><h1 id="定义接口">定义接口</h1>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">type</span> Shaper <span style="color:#8be9fd;font-style:italic">interface</span> {
-    <span style="color:#50fa7b">Area</span>() <span style="color:#8be9fd">float64</span>
-}
-</code></pre></div><p>接口定义了一个 方法的集合，但是这些方法不包含实现代码，它们是抽象的，接口里也不能包含变量。
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">str</span> <span style="color:#66d9ef">string</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span> () {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myname</span> <span style="color:#a6e22e">str</span> = <span style="color:#e6db74">&#34;Ling&#34;</span>
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s&#34;</span>,<span style="color:#a6e22e">myname</span>)
+}</code></pre></div>
+<h1 id="定义接口">定义接口</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Shaper</span> <span style="color:#66d9ef">interface</span> {
+    <span style="color:#a6e22e">Area</span>() <span style="color:#66d9ef">float64</span>
+}</code></pre></div>
+<p>接口定义了一个 方法的集合，但是这些方法不包含实现代码，它们是抽象的，接口里也不能包含变量。
 注意实现接口可以是<strong>结构体类型</strong>，也可以是<strong>函数类型</strong>。</p>
+
 <h1 id="定义函数类型">定义函数类型</h1>
+
 <p>当不定义函数类型，传递函数时：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
 
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">isOdd</span>(integer <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">bool</span> {
-    <span style="color:#ff79c6">if</span> integer<span style="color:#ff79c6">%</span><span style="color:#bd93f9">2</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> {
-        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">isOdd</span>(<span style="color:#a6e22e">integer</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> {
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">integer</span><span style="color:#f92672">%</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
     }
-    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">true</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
 }
 
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">isEven</span>(integer <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">bool</span> {
-    <span style="color:#ff79c6">if</span> integer<span style="color:#ff79c6">%</span><span style="color:#bd93f9">2</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> {
-        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">true</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">isEven</span>(<span style="color:#a6e22e">integer</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> {
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">integer</span><span style="color:#f92672">%</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
     }
-    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
 }
 
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">filter</span>(slice []<span style="color:#8be9fd">int</span>, f <span style="color:#8be9fd;font-style:italic">func</span>(<span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">bool</span>) []<span style="color:#8be9fd">int</span> {
-    <span style="color:#8be9fd;font-style:italic">var</span> result []<span style="color:#8be9fd">int</span>
-    <span style="color:#ff79c6">for</span> _, value <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> slice {
-        <span style="color:#ff79c6">if</span> <span style="color:#50fa7b">f</span>(value) {
-            result = <span style="color:#8be9fd;font-style:italic">append</span>(result, value)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">slice</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">f</span> <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span>) []<span style="color:#66d9ef">int</span> {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">result</span> []<span style="color:#66d9ef">int</span>
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">value</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">slice</span> {
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">value</span>) {
+            <span style="color:#a6e22e">result</span> = append(<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">value</span>)
         }
     }
-    <span style="color:#ff79c6">return</span> result
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>
 }
 
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">test</span>(){
-        slice <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd">int</span> {<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">7</span>}
-        fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;slice = &#34;</span>, slice)
-        odd_res <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">filter</span>(slice, isOdd)    <span style="color:#6272a4">// 函数当做值来传递了
-</span><span style="color:#6272a4"></span>        fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Odd elements of slice are: &#34;</span>, odd_res)
-        even_res <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">filter</span>(slice, isEven)  <span style="color:#6272a4">// 函数当做值来传递了
-</span><span style="color:#6272a4"></span>        fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Even elements of slice are: &#34;</span>, even_res)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">test</span>(){
+        <span style="color:#a6e22e">slice</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">int</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>}
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;slice = &#34;</span>, <span style="color:#a6e22e">slice</span>)
+        <span style="color:#a6e22e">odd_res</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">slice</span>, <span style="color:#a6e22e">isOdd</span>)    <span style="color:#75715e">// 函数当做值来传递了
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Odd elements of slice are: &#34;</span>, <span style="color:#a6e22e">odd_res</span>)
+        <span style="color:#a6e22e">even_res</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">slice</span>, <span style="color:#a6e22e">isEven</span>)  <span style="color:#75715e">// 函数当做值来传递了
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Even elements of slice are: &#34;</span>, <span style="color:#a6e22e">even_res</span>)
 }
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
-    <span style="color:#50fa7b">test</span>()
-}
-</code></pre></div><p>当定义函数类型，传递函数时：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>(){
+    <span style="color:#a6e22e">test</span>()
+}</code></pre></div>
+<p>当定义函数类型，传递函数时：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
 
-<span style="color:#8be9fd;font-style:italic">type</span> functinTyoe <span style="color:#8be9fd;font-style:italic">func</span>(<span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">bool</span> <span style="color:#6272a4">// 声明了一个函数类型
-</span><span style="color:#6272a4"></span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">isOdd</span>(integer <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">bool</span> {
-    <span style="color:#ff79c6">if</span> integer<span style="color:#ff79c6">%</span><span style="color:#bd93f9">2</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> {
-        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">functinTyoe</span> <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> <span style="color:#75715e">// 声明了一个函数类型
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">isOdd</span>(<span style="color:#a6e22e">integer</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> {
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">integer</span><span style="color:#f92672">%</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
     }
-    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">true</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
 }
 
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">isEven</span>(integer <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">bool</span> {
-    <span style="color:#ff79c6">if</span> integer<span style="color:#ff79c6">%</span><span style="color:#bd93f9">2</span> <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> {
-        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">true</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">isEven</span>(<span style="color:#a6e22e">integer</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> {
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">integer</span><span style="color:#f92672">%</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
     }
-    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
 }
 
-<span style="color:#6272a4">// 声明的函数类型在这个地方当做了一个参数
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">filter</span>(slice []<span style="color:#8be9fd">int</span>, f functinTyoe) []<span style="color:#8be9fd">int</span> {
-    <span style="color:#8be9fd;font-style:italic">var</span> result []<span style="color:#8be9fd">int</span>
-    <span style="color:#ff79c6">for</span> _, value <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> slice {
-        <span style="color:#ff79c6">if</span> <span style="color:#50fa7b">f</span>(value) {
-            result = <span style="color:#8be9fd;font-style:italic">append</span>(result, value)
+<span style="color:#75715e">// 声明的函数类型在这个地方当做了一个参数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">slice</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">f</span> <span style="color:#a6e22e">functinTyoe</span>) []<span style="color:#66d9ef">int</span> {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">result</span> []<span style="color:#66d9ef">int</span>
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">value</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">slice</span> {
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">value</span>) {
+            <span style="color:#a6e22e">result</span> = append(<span style="color:#a6e22e">result</span>, <span style="color:#a6e22e">value</span>)
         }
     }
-    <span style="color:#ff79c6">return</span> result
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>
 }
 
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">test</span>(){
-        slice <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd">int</span> {<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">7</span>}
-        fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;slice = &#34;</span>, slice)
-        odd_res <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">filter</span>(slice, isOdd)    <span style="color:#6272a4">// 函数当做值来传递了
-</span><span style="color:#6272a4"></span>        fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Odd elements of slice are: &#34;</span>, odd_res)
-        even_res <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">filter</span>(slice, isEven)  <span style="color:#6272a4">// 函数当做值来传递了
-</span><span style="color:#6272a4"></span>        fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;Even elements of slice are: &#34;</span>, even_res)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">test</span>(){
+        <span style="color:#a6e22e">slice</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">int</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span>}
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;slice = &#34;</span>, <span style="color:#a6e22e">slice</span>)
+        <span style="color:#a6e22e">odd_res</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">slice</span>, <span style="color:#a6e22e">isOdd</span>)    <span style="color:#75715e">// 函数当做值来传递了
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Odd elements of slice are: &#34;</span>, <span style="color:#a6e22e">odd_res</span>)
+        <span style="color:#a6e22e">even_res</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">slice</span>, <span style="color:#a6e22e">isEven</span>)  <span style="color:#75715e">// 函数当做值来传递了
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Even elements of slice are: &#34;</span>, <span style="color:#a6e22e">even_res</span>)
 }
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
-    <span style="color:#50fa7b">test</span>()
-</code></pre></div>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>(){
+    <span style="color:#a6e22e">test</span>()</code></pre></div>
 
                 
                 

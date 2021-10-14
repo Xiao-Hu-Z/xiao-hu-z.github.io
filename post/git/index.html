@@ -205,71 +205,96 @@
                 post-container">
 
                 
-                <h1 id="git">Git</h1>
-<p>
-  <img src="https://raw.githubusercontent.com/Xiao-Hu-Z/blog-img/master/git/Git%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4%e9%80%9f%e6%9f%a5%e8%a1%a8.png" alt="">
+                
 
-</p>
+<h1 id="git">Git</h1>
+
+<p><img src="https://raw.githubusercontent.com/Xiao-Hu-Z/blog-img/master/git/Git常用命令速查表.png" alt="" /></p>
+
 <h2 id="git的相关术语">Git的相关术语</h2>
-<p>
-  <img src="https://raw.githubusercontent.com/Xiao-Hu-Z/blog-img/master/git/image2020-8-26_15-52-14.png" alt="">
 
-</p>
+<p><img src="https://raw.githubusercontent.com/Xiao-Hu-Z/blog-img/master/Go/image2020-8-26_15-52-14.png"/></p>
+
 <ul>
-<li>
-<p>工作区（workspace）</p>
-<p>程序员进行开发改动的地方，是你当前看到的，也是最新的。平常我们开发就是拷贝远程仓库中的一个分支，基于该分支进行开发。在开发过程中就是对工作区的操作。</p>
-</li>
-<li>
-<p>暂存区(index)</p>
-<p>.git目录下的index文件, 暂存区会记录 git add 添加文件的相关信息(文件名、大小、timestamp…)，不保存文件实体, 通过id指向每个文件实体。可以使用  git status  查看暂存区的状态。暂存区标记了你当前工作区中，哪些内容是被git管理的。当你完成某个需求或功能后需要提交到远程仓库，那么第一步就是通过 git  add 先提交到暂存区，被git管理。</p>
-</li>
-<li>
-<p>本地仓库(repository)：</p>
-<p>保存了对象被提交 过的各个版本，比起工作区和暂存区的内容，它要更旧一些。git commit 后同步index的目录树到本地仓库，方便从下一步通过 git push 同步本地仓库与远程仓库的同步。</p>
-</li>
-<li>
-<p>远程仓库(remote)：</p>
-<p>远程仓库的内容可能被分布在多个地点的处于协作关系的本地仓库修改，因此它可能与本地仓库同步，也可能不同步，但是它的内容是最旧的。</p>
-</li>
+<li>工作区（workspace）</li>
 </ul>
+
+<p>程序员进行开发改动的地方，是你当前看到的，也是最新的。平常我们开发就是拷贝远程仓库中的一个分支，基于该分支进行开发。在开发过程中就是对工作区的操作。</p>
+
+<ul>
+<li>暂存区(index)</li>
+</ul>
+
+<p>.git目录下的index文件, 暂存区会记录 git add 添加文件的相关信息(文件名、大小、timestamp…)，不保存文件实体, 通过id指向每个文件实体。可以使用  git status  查看暂存区的状态。暂存区标记了你当前工作区中，哪些内容是被git管理的。当你完成某个需求或功能后需要提交到远程仓库，那么第一步就是通过 git  add 先提交到暂存区，被git管理。</p>
+
+<ul>
+<li>本地仓库(repository)：</li>
+</ul>
+
+<p>保存了对象被提交 过的各个版本，比起工作区和暂存区的内容，它要更旧一些。git commit 后同步index的目录树到本地仓库，方便从下一步通过 git push 同步本地仓库与远程仓库的同步。</p>
+
+<ul>
+<li>远程仓库(remote)：</li>
+</ul>
+
+<p>远程仓库的内容可能被分布在多个地点的处于协作关系的本地仓库修改，因此它可能与本地仓库同步，也可能不同步，但是它的内容是最旧的。</p>
+
 <h2 id="git基本命令">Git基本命令</h2>
+
 <p>初次提交</p>
-<pre><code>git add 文件
-git commit -m &quot;说明&quot;
-git push origin HEAD:refs/for/master
-</code></pre><p>修改后提交</p>
-<pre><code>git add 文件
+<pre tabindex="0"><code>git add 文件
+git commit -m &#34;说明&#34;
+git push origin HEAD:refs/for/master</code></pre>
+<p>修改后提交</p>
+<pre tabindex="0"><code>git add 文件
 git commit --amend
-git push origin HEAD:refs/for/master
-</code></pre><p>删除：</p>
-<pre><code>git add/rm 文件
-git commit -m &quot;说明&quot;
-git push origin HEAD:refs/for/master
-</code></pre><p>创建分支：git branch dev</p>
+git push origin HEAD:refs/for/master</code></pre>
+<p>删除：</p>
+<pre tabindex="0"><code>git add/rm 文件
+git commit -m &#34;说明&#34;
+git push origin HEAD:refs/for/master</code></pre>
+<p>创建分支：git branch dev</p>
+
 <p>切换分支：git checkout dev</p>
+
 <p>创建并切换分支：git checkout -b dev</p>
+
 <p><strong>版本之间的diff</strong></p>
+
 <p>查看简单的diff结果，可以加上–stat参数，执行命令如下：</p>
+
 <blockquote>
-<pre><code>git diff --stat
-</code></pre></blockquote>
-<p>比较上次提交commit和上上次提交的差别时，执行如下命令：</p>
-<blockquote>
-<pre><code>git diff HEAD^ HEAD
-</code></pre></blockquote>
-<p><strong>查看创建的提交的更改信息</strong></p>
-<pre><code>git log
-</code></pre><p>拉去远端分支：git pull origin 分支名</p>
-<p>撤销已经被放入暂存区的文件：<strong>git reset HEAD 文件</strong></p>
-<p>问题1：</p>
-<p>error: cannot pull with rebase: You have unstaged changes.</p>
-<p>error: please commit or stash them.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git stash <span style="color:#6272a4">#可用来暂存当前正在进行的工作</span>
-git pull –rebase <span style="color:#6272a4">#在一个随机创建的分支上处理冲突，避免了直接污染原来的分区</span>
-git stash pop <span style="color:#6272a4">#从Git栈中读取最近一次保存的内容</span>
-</code></pre></div><h1 id="icode">icode</h1>
+<pre tabindex="0"><code>&gt; git diff --stat
+&gt; ```
+
+比较上次提交commit和上上次提交的差别时，执行如下命令：
+
+&gt; ```
+&gt; git diff HEAD^ HEAD
+&gt; ```
+
+**查看创建的提交的更改信息**</code></pre>
+<p>git log</p>
+<pre tabindex="0"><code>拉去远端分支：git pull origin 分支名
+
+撤销已经被放入暂存区的文件：**git reset HEAD 文件**
+
+问题1：
+
+error: cannot pull with rebase: You have unstaged changes.
+
+error: please commit or stash them.</code></pre>
+<p>shell
+git stash #可用来暂存当前正在进行的工作
+git pull –rebase #在一个随机创建的分支上处理冲突，避免了直接污染原来的分区
+git stash pop #从Git栈中读取最近一次保存的内容
+```</p>
+</blockquote>
+
+<h1 id="icode">icode</h1>
+
 <p>注意点：</p>
+
 <ul>
 <li>上线后不能提代码，要先取消上线</li>
 <li>CR+2分后不能在原有的基础上继续提交代码，提交代码git commit -m &ldquo;卡片id&rdquo;</li>
