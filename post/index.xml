@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Xiaou Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 19 Oct 2021 11:07:01 +0800</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ral</title>
+      <link>https://xiao-hu-z.github.io/post/baidu/ral/</link>
+      <pubDate>Tue, 19 Oct 2021 11:07:01 +0800</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/baidu/ral/</guid>
+      <description>概述 RAL，全称为 Resource Access Layer ，是 ODP（Online Development Platform，在线业务开发平台，面向全百度的在线业务支撑平台） 的资源访问层，以 PHP 扩展的</description>
+    </item>
+    
     <item>
       <title>Go语言基础之init函数</title>
       <link>https://xiao-hu-z.github.io/post/go/goinit%E5%87%BD%E6%95%B0/</link>

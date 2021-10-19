@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ral on Xiaou Blog</title>
+    <link>https://xiao-hu-z.github.io/tags/ral/</link>
+    <description>Recent content in ral on Xiaou Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Oct 2021 11:07:01 +0800</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/ral/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ral</title>
+      <link>https://xiao-hu-z.github.io/post/baidu/ral/</link>
+      <pubDate>Tue, 19 Oct 2021 11:07:01 +0800</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/baidu/ral/</guid>
+      <description>概述 RAL，全称为 Resource Access Layer ，是 ODP（Online Development Platform，在线业务开发平台，面向全百度的在线业务支撑平台） 的资源访问层，以 PHP 扩展的</description>
+    </item>
+    
+    <item>
+      <title>标签</title>
+      <link>https://xiao-hu-z.github.io/tags/</link>
+      <pubDate>Sun, 20 Oct 2019 17:12:25 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/tags/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

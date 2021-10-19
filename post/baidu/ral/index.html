@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="关于" />
-    <meta property="og:title" content="关于" />
-    <meta property="twitter:title" content="关于" />
+    <meta name="title" content="ral" />
+    <meta property="og:title" content="ral" />
+    <meta property="twitter:title" content="ral" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="xiaohu Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>关于-xiaohu的博客 | xiaohu Blog</title>
+    <title>ral-xiaohu的博客 | xiaohu Blog</title>
 
-    <link rel="canonical" href="/about/">
+    <link rel="canonical" href="/post/baidu/ral/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 
@@ -165,17 +165,21 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/tags/ral" title="ral">
+                            ral
+                        </a>
+                        
                     </div>
-                    <h1>关于</h1>
+                    <h1>ral</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         
                             Posted by 
                             
-                                    Xiaou Blog
+                                xiaohu
                              
                             on 
-                            Sunday, October 20, 2019
+                            Tuesday, October 19, 2021
                             
                             
                             
@@ -201,9 +205,46 @@
                 post-container">
 
                 
-                <p>The programmer, like the poet, works only slightly removed from pure  thought-stuff. He builds his castles in the air, from air, creating by  exertion of the imagination.</p>
+                
 
-<p>—— Xiaohu Zhao</p>
+<h1 id="概述">概述</h1>
+
+<p>RAL，全称为 <strong>Resource Access Layer</strong> ，是  ODP（Online Development Platform，在线业务开发平台，面向全百度的在线业务支撑平台） 的资源访问层，以 PHP  扩展的方式提供一个客户端，实现了对后端服务端交互的支持，用户在添加相应服务配置后，即可使用 RAL  一站式接口与后端服务进行交互，而不需要关注数据格式处理与协议交互的过程，为后端交互提供简单可依赖的支持。</p>
+
+<h1 id="log日志">log日志</h1>
+
+<p><code>ral.log</code> / <code>ral.log.wf</code> 是ral进程的日志文件，查看ral启动、配置更新加载、资源定位成功失败可查看该日志</p>
+
+<p><code>ral-worker.log</code> / <code>ral-worker.log.wf</code> 是工作进程的配置文件，判读工作进程正常加载及交互成功失败，都可查看该日志</p>
+
+<ul>
+<li>logid 唯一标识一次用户请求的id, 如：logid=2526657866，由前端机器生成(小时范围内不能重复)</li>
+<li>caller 打印该条日志的对象，标识该条日志属于RAL或其他网络交互库, 如: caller=RAL 或 caller=Bd_DB 其他网络交互库使用ral_write_log接口打印日志</li>
+<li>service 表示请求的服务名称,例如：service_user</li>
+<li>method表示协议的请求类型，对http包括get、post、put和delete，而对nshead协议来说暂时无意义</li>
+<li>prot 表示协议类型，如prot=http</li>
+<li>user_ip 表示本次请求实际用户的ip</li>
+<li>local_ip 表示本机ip</li>
+<li>remote_ip 表示本次请求后端服务的ip:port, 如remote_ip=10.10.10.10:8080</li>
+<li>remote_host(后续支持) 表示请求后端服务的域名,ip存在时优先使用ip</li>
+<li>uniqid 每次ral调用的唯一uniqid(失败重试的时候会改变)</li>
+<li>spanid 每次ral请求中的调用id(失败重试的时候spanid不会改变)</li>
+<li>req_id 每次ral请求的req_id(每个request的req_id都是不一样的)</li>
+<li>request_name 请求的name</li>
+<li>reqs_cost 本次ral_multi请求总耗时，ms (一次ral_multi请求中最后一个request的E_SUM日志中)</li>
+<li>cost 总耗时，ms</li>
+<li>talk 本次交互耗时，ms</li>
+<li>connect 链接耗时，ms</li>
+<li>write 写耗时ms</li>
+<li>read 读耗时，ms</li>
+<li>pack 打包的耗时 ms</li>
+<li>unpack 解包的耗时 ms</li>
+<li>retry 重试次数 如retry=0/2 表示，第1次交互(0表示未开始重试)，最多2次重试</li>
+<li>req_start_time 请求开始执行时间(打包之前) ms</li>
+<li>talk_start_time 请求准备连接时间(打包和负载均衡之后) ms</li>
+</ul>
+
+<p>参考：<a href="http://man.baidu.com/inf/odp/ral2/#%E6%97%A5%E5%BF%97_%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83">http://man.baidu.com/inf/odp/ral2/#%E6%97%A5%E5%BF%97_%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83</a></p>
 
 
                 
@@ -252,15 +293,10 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/tags/" data-toggle="tooltip" data-placement="top" title="标签">&larr;
+                        <a href="/post/go/goinit%E5%87%BD%E6%95%B0/" data-toggle="tooltip" data-placement="top" title="Go语言基础之init函数">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/category/" data-toggle="tooltip" data-placement="top" title="分类">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
                 
