@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Xiaou Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://xiao-hu-z.github.io/https://source.unsplash.com/random/1600x900?wallpapers">
+    <meta property="twitter:image" content="https://xiao-hu-z.github.io/https://source.unsplash.com/random/1600x900?wallpapers" />
+    
+
+    
+    <meta name="title" content="Go语言基础之内联结构体" />
+    <meta property="og:title" content="Go语言基础之内联结构体" />
+    <meta property="twitter:title" content="Go语言基础之内联结构体" />
+    
+
+    
+    <meta name="description" content="这里是xiaohu的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="这里是xiaohu的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="这里是xiaohu的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="xiaohu Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Go语言基础之内联结构体-xiaohu的博客 | xiaohu Blog</title>
+
+    <link rel="canonical" href="/post/go/golang-%E5%86%85%E8%81%94%E7%BB%93%E6%9E%84%E4%BD%93/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Xiaou Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/archive/">ARCHIVE</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://source.unsplash.com/random/1600x900?wallpapers')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/go" title="Go">
+                            Go
+                        </a>
+                        
+                    </div>
+                    <h1>Go语言基础之内联结构体</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                xiaohu
+                             
+                            on 
+                            Thursday, November 4, 2021
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                
+
+<h1 id="struct-embeding">Struct embeding</h1>
+
+<p>golang 中没有继承，但是其结构体内联的方式和继承很像，掌握内联结构体，实现面向对象</p>
+
+<p>小王是一个很棒的strcut，他有一个field叫length，小王对自己的length非常满意，所以他还有专门炫耀自己的长度method： <strong>ShowLength()</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">XiaoWang</span> <span style="color:#66d9ef">struct</span>{
+    <span style="color:#a6e22e">length</span> <span style="color:#66d9ef">int</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewXiaoWang</span>(<span style="color:#a6e22e">length</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">XiaoWang</span>{
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">XiaoWang</span>{
+        <span style="color:#a6e22e">length</span>:<span style="color:#a6e22e">length</span>,
+    }
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">zj</span> <span style="color:#a6e22e">XiaoWang</span>) <span style="color:#a6e22e">ShowLength</span>(){
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;XiaoWang&#39;s length is %d\n&#34;</span>,<span style="color:#a6e22e">zj</span>.<span style="color:#a6e22e">length</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">zj</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewXiaoWang</span>(<span style="color:#ae81ff">18</span>)
+    <span style="color:#a6e22e">zj</span>.<span style="color:#a6e22e">ShowLength</span>()
+}</code></pre></div>
+<p>运行结果为：小王的length 为 18 ！嗯，还是很不错的</p>
+
+<p>突然有一天，老王来了，它是一个<strong>以小王为内联的结构体</strong>，为了变强，吸取了小王的精华，<strong>具有小王的所有field 和 method</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">XiaoWang</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">length</span> <span style="color:#66d9ef">int</span>
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">LaoWang</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">XiaoWang</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewXiaoWang</span>(<span style="color:#a6e22e">length</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">XiaoWang</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">XiaoWang</span>{
+		<span style="color:#a6e22e">length</span>: <span style="color:#a6e22e">length</span>,
+	}
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">zj</span> <span style="color:#a6e22e">XiaoWang</span>) <span style="color:#a6e22e">ShowLength</span>() {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;XiaoWang&#39;s length is %d\n&#34;</span>, <span style="color:#a6e22e">zj</span>.<span style="color:#a6e22e">length</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewLaoWang</span>(<span style="color:#a6e22e">length</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">LaoWang</span> {
+	<span style="color:#a6e22e">bzj</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">LaoWang</span>{}
+	<span style="color:#a6e22e">bzj</span>.<span style="color:#a6e22e">length</span> = <span style="color:#a6e22e">length</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#75715e">// 长度翻倍
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">bzj</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">bzj</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewLaoWang</span>(<span style="color:#ae81ff">18</span>)
+	<span style="color:#a6e22e">bzj</span>.<span style="color:#a6e22e">ShowLength</span>() <span style="color:#75715e">// 老王可以调用小王的method
+</span><span style="color:#75715e"></span>}</code></pre></div>
+<p>运行结果为：XiaoWang的length已经变为了36！<strong>原来在NewLaoWang 中，对length进行了翻倍</strong></p>
+<pre tabindex="0"><code>XiaoWang&#39;s length is 36</code></pre>
+<p>老王不满足于仅仅炫耀他的length，于是<strong>重写了他的 ShowLength()</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">bzj</span> <span style="color:#a6e22e">LaoWang</span>) <span style="color:#a6e22e">ShowLength</span>() {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;LaoWang&#39;s length is %d,And can use for a long time!\n&#34;</span>, <span style="color:#a6e22e">bzj</span>.<span style="color:#a6e22e">length</span>)
+}
+<span style="color:#75715e">//LaoWang&#39;s length is 36,And can use for a long time!
+</span></code></pre></div>
+<p>再次运行，<strong>现在的ShowLength() 覆盖了 原来的ShowLength()</strong>, LaoWang不仅length很长，而且还很持久！</p>
+
+<p>变长后的老王更自信了，想进一步炫耀他的宽度</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">XiaoWang</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">length</span> <span style="color:#66d9ef">int</span>
+}
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">LaoWang</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">XiaoWang</span>
+	<span style="color:#a6e22e">width</span> <span style="color:#66d9ef">int</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewXiaoWang</span>(<span style="color:#a6e22e">length</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">XiaoWang</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">XiaoWang</span>{
+		<span style="color:#a6e22e">length</span>: <span style="color:#a6e22e">length</span>,
+	}
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">zj</span> <span style="color:#a6e22e">XiaoWang</span>) <span style="color:#a6e22e">ShowLength</span>() {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;XiaoWang&#39;s length is %d\n&#34;</span>, <span style="color:#a6e22e">zj</span>.<span style="color:#a6e22e">length</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewLaoWang</span>(<span style="color:#a6e22e">length</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">width</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">LaoWang</span> {
+	<span style="color:#a6e22e">bzj</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">LaoWang</span>{}
+	<span style="color:#a6e22e">bzj</span>.<span style="color:#a6e22e">length</span> = <span style="color:#a6e22e">length</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#75715e">// 长度翻倍
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">bzj</span>.<span style="color:#a6e22e">width</span> = <span style="color:#a6e22e">width</span>
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">bzj</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">bzj</span> <span style="color:#a6e22e">LaoWang</span>) <span style="color:#a6e22e">ShowLength</span>() {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;LaoWang&#39;s length is %d,And can use for a long time!\n&#34;</span>, <span style="color:#a6e22e">bzj</span>.<span style="color:#a6e22e">length</span>)
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">bzj</span> <span style="color:#a6e22e">LaoWang</span>) <span style="color:#a6e22e">ShowWidth</span>() {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;XiaoWang&#39;s width is %d\n&#34;</span>, <span style="color:#a6e22e">bzj</span>.<span style="color:#a6e22e">width</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">bzj</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewLaoWang</span>(<span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">8</span>)
+	<span style="color:#a6e22e">bzj</span>.<span style="color:#a6e22e">ShowLength</span>() <span style="color:#75715e">// 老王可以调用小王的method
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">bzj</span>.<span style="color:#a6e22e">ShowWidth</span>()
+}</code></pre></div>
+<p>Good，太length太width，很棒！！！</p>
+
+<p>总结：</p>
+
+<p>结构体会“继承”内联结构体的字段和方法，如果如果同名，则会覆盖</p>
+
+<h1 id="example">example</h1>
+
+<h2 id="互斥锁内联">互斥锁内联</h2>
+
+<p>在实际编程中，我们会经常用到 锁 sync.Mutex,一般的写法是这样：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">M</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">mutex</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Mutex</span>
+    <span style="color:#a6e22e">someFiled</span> <span style="color:#66d9ef">string</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">m</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">M</span>) <span style="color:#a6e22e">process</span>(){
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Helle World!&#34;</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">M</span>{}
+    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">mutex</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Mutex</span>{}
+    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">mutex</span>.<span style="color:#a6e22e">Lock</span>()
+    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">process</span>()
+    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">mutex</span>.<span style="color:#a6e22e">Unlock</span>()
+}</code></pre></div>
+<p>通过内联我们可以简写为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">M</span> <span style="color:#66d9ef">struct</span> {
+    <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Mutex</span>
+    <span style="color:#a6e22e">someFiled</span> <span style="color:#66d9ef">string</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">m</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">M</span>) <span style="color:#a6e22e">process</span>(){
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Helle World!&#34;</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">M</span>{}
+    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">Lock</span>()
+    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">process</span>()
+    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">Unlock</span>()
+}</code></pre></div>
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="https://xiao-hu-z.github.io"><img src="/img/favicon.png" />Xiaou Blog</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/%E5%B9%B6%E5%8F%91/mutex%E7%9A%84%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8F%98/" data-toggle="tooltip" data-placement="top" title="mutex的架构演变">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+                
+
+
+<script src="https://utteranc.es/client.js"
+        repo="Xiao-Hu-Z/hugoblogtalks"
+        issue-term="pathname"
+        theme="github-light"  
+        crossorigin="anonymous"
+        async>
+</script>
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/git" title="git">
+                            git
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/go" title="go">
+                            go
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ral" title="ral">
+                            ral
+                        </a>
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Xiaou Blog" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:znxxhn@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/xiao-hu-z">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Xiaou Blog 2021
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+</body>
+</html>

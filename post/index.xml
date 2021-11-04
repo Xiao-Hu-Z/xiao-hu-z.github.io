@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Xiaou Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go语言基础之内联结构体</title>
+      <link>https://xiao-hu-z.github.io/post/go/golang-%E5%86%85%E8%81%94%E7%BB%93%E6%9E%84%E4%BD%93/</link>
+      <pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/go/golang-%E5%86%85%E8%81%94%E7%BB%93%E6%9E%84%E4%BD%93/</guid>
+      <description>Struct embeding golang 中没有继承，但是其结构体内联的方式和继承很像，掌握内联结构体，实现面向对象 小王是一个很棒的strcut，他有一个field叫lengt</description>
+    </item>
+    
     <item>
       <title>mutex的架构演变</title>
       <link>https://xiao-hu-z.github.io/post/%E5%B9%B6%E5%8F%91/mutex%E7%9A%84%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8F%98/</link>
