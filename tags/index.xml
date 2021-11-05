@@ -6,7 +6,16 @@
     <description>Recent content in Tags on Xiaou Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux</title>
+      <link>https://xiao-hu-z.github.io/tags/linux/</link>
+      <pubDate>Fri, 05 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Go</title>
       <link>https://xiao-hu-z.github.io/tags/go/</link>
@@ -40,15 +49,6 @@
       <pubDate>Tue, 19 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://xiao-hu-z.github.io/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>https://xiao-hu-z.github.io/tags/linux/</link>
-      <pubDate>Mon, 11 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://xiao-hu-z.github.io/tags/linux/</guid>
       <description></description>
     </item>
     

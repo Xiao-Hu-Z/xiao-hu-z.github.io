@@ -6,7 +6,16 @@
     <description>Recent content on Xiaou Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>linux——diff命令解析</title>
+      <link>https://xiao-hu-z.github.io/post/linux/linuxdiff%E5%91%BD%E4%BB%A4%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Fri, 05 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/linux/linuxdiff%E5%91%BD%E4%BB%A4%E8%A7%A3%E6%9E%90/</guid>
+      <description>diff命令 Linux diff 命令用于比较文件的差异。 diff 以逐行的方式，比较文本文件的异同处。如果指定要比较目录，则 diff 会比较目录中相同文件名的文件，但不会比</description>
+    </item>
+    
     <item>
       <title>Go语言基础之内联结构体</title>
       <link>https://xiao-hu-z.github.io/post/go/golang-%E5%86%85%E8%81%94%E7%BB%93%E6%9E%84%E4%BD%93/</link>
