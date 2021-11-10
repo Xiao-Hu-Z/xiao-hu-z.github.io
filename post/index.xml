@@ -6,7 +6,25 @@
     <description>Recent content in Posts on Xiaou Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>linux——压缩与打包</title>
+      <link>https://xiao-hu-z.github.io/post/linux/linux%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/</link>
+      <pubDate>Wed, 10 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/linux/linux%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/</guid>
+      <description>tar压缩与解压 压缩文件名 Linux 底下有很多压缩文件名，常见的如下： 扩展名 压缩程序 *.Z compress *.zip zip *.gz gzip *.bz2 bzip2 *.xz xz *.tar tar 程序打包的数据，没有经过压缩 *.tar.gz tar 程序打包</description>
+    </item>
+    
+    <item>
+      <title>Go实现set</title>
+      <link>https://xiao-hu-z.github.io/post/go/go%E5%AE%9E%E7%8E%B0set/</link>
+      <pubDate>Tue, 09 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/go/go%E5%AE%9E%E7%8E%B0set/</guid>
+      <description>set 使用map实现set 在Golang中通常使用map来实现set，map中的key为唯一值，这与set的特性一致。 简单实现，如下： set := make(map[string]bool) // New</description>
+    </item>
+    
     <item>
       <title>linux——diff命令解析</title>
       <link>https://xiao-hu-z.github.io/post/linux/linuxdiff%E5%91%BD%E4%BB%A4%E8%A7%A3%E6%9E%90/</link>

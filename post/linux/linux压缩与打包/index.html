@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="linux——diff命令解析" />
-    <meta property="og:title" content="linux——diff命令解析" />
-    <meta property="twitter:title" content="linux——diff命令解析" />
+    <meta name="title" content="linux——压缩与打包" />
+    <meta property="og:title" content="linux——压缩与打包" />
+    <meta property="twitter:title" content="linux——压缩与打包" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="xiaohu Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>linux——diff命令解析-xiaohu的博客 | xiaohu Blog</title>
+    <title>linux——压缩与打包-xiaohu的博客 | xiaohu Blog</title>
 
-    <link rel="canonical" href="/post/linux/linuxdiff%E5%91%BD%E4%BB%A4%E8%A7%A3%E6%9E%90/">
+    <link rel="canonical" href="/post/linux/linux%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 
@@ -170,7 +170,7 @@
                         </a>
                         
                     </div>
-                    <h1>linux——diff命令解析</h1>
+                    <h1>linux——压缩与打包</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         
@@ -179,7 +179,7 @@
                                 xiaohu
                              
                             on 
-                            Friday, November 5, 2021
+                            Wednesday, November 10, 2021
                             
                             
                             
@@ -207,273 +207,183 @@
                 
                 
 
-<h1 id="diff命令"><code>diff命令</code></h1>
+<h1 id="tar压缩与解压">tar压缩与解压</h1>
 
-<p>Linux diff 命令用于比较文件的差异。</p>
+<h2 id="压缩文件名">压缩文件名</h2>
 
-<p>diff 以逐行的方式，比较文本文件的异同处。如果指定要比较目录，则 diff 会比较目录中相同文件名的文件，但不会比较其中子目录。</p>
-<pre tabindex="0"><code>diff [文件或目录1][文件或目录2]</code></pre>
-<p><strong>参数：</strong></p>
+<p>Linux 底下有很多压缩文件名，常见的如下：</p>
 
 <table>
 <thead>
 <tr>
-<th>选项</th>
-<th>描述</th>
+<th>扩展名</th>
+<th>压缩程序</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td>-&lt;行数&gt;</td>
-<td>指定要显示多少行的文本。此参数必须与-c或-u参数一并使用</td>
+<td>*.Z</td>
+<td>compress</td>
 </tr>
 
 <tr>
-<td>-a或&ndash;text</td>
-<td>diff预设只会逐行比较文本文件</td>
+<td>*.zip</td>
+<td>zip</td>
 </tr>
 
 <tr>
-<td>-b或&ndash;ignore-space-change</td>
-<td>不检查空格字符的不同</td>
+<td>*.gz</td>
+<td>gzip</td>
 </tr>
 
 <tr>
-<td></td>
-<td></td>
+<td>*.bz2</td>
+<td>bzip2</td>
 </tr>
 
 <tr>
-<td></td>
-<td></td>
+<td>*.xz</td>
+<td>xz</td>
 </tr>
 
 <tr>
-<td></td>
-<td></td>
+<td>*.tar</td>
+<td>tar 程序打包的数据，没有经过压缩</td>
 </tr>
 
 <tr>
-<td></td>
-<td></td>
+<td>*.tar.gz</td>
+<td>tar 程序打包的文件，经过 gzip 的压缩</td>
 </tr>
 
 <tr>
-<td></td>
-<td></td>
+<td>*.tar.bz2</td>
+<td>tar 程序打包的文件，经过 bzip2 的压缩</td>
 </tr>
 
 <tr>
-<td></td>
-<td></td>
+<td>*.tar.xz</td>
+<td>tar 程序打包的文件，经过 xz 的压缩</td>
 </tr>
 </tbody>
 </table>
 
-<h1 id="diff的三种格式"><strong>diff的三种格式</strong></h1>
+<h2 id="压缩指令">压缩指令</h2>
 
-<ul>
-<li><p>正常格式（normal diff）</p></li>
+<h3 id="1-gzip">1. gzip</h3>
 
-<li><p>上下文格式（context diff）</p></li>
+<p>gzip 是 Linux 使用最广的压缩指令，可以解开 compress、zip 与 gzip 所压缩的文件。</p>
 
-<li><p>合并格式（unified diff）</p></li>
-</ul>
+<p>经过 gzip 压缩过，源文件就不存在了。</p>
 
-<p>举例：</p>
+<p>有 9 个不同的压缩等级可以使用。</p>
 
-<p>第一个文件叫做f1，内容是每行一个a，一共7行。</p>
-<pre tabindex="0"><code>　　a
-　　a
-　　a
-　　a
-　　a
-　　a
-　　a</code></pre>
-<p>第二个文件叫做f2，修改f1而成，第4行变成b，其他不变。</p>
-<pre tabindex="0"><code>　　a
-　　a
-　　a
-　　b
-　　a
-　　a
-　　a</code></pre>
-<h2 id="正常格式diff">正常格式diff</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">zhaoxiaohu01@B000000399848t doc % diff f1.txt f2.txt
-4c4
-&lt; 　　a
----
-&gt; 　　b</code></pre></div>
-<p>分为三个部分：</p>
+<p>可以使用 zcat、zmore、zless 来读取压缩文件的内容。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gzip <span style="color:#f92672">[</span>-cdtv#<span style="color:#f92672">]</span> filename
 
-<ul>
-<li><p>第一行：</p>
+-c ：将压缩的数据输出到屏幕上
+-d ：解压缩
+-t ：检验压缩文件是否出错
+-v ：显示压缩比等信息
+-# ： <span style="color:#75715e"># 为数字的意思，代表压缩等级，数字越大压缩比越高，默认为 -6</span></code></pre></div>
+<h3 id="2-bzip2">2. bzip2</h3>
 
-<ul>
-<li>前面的&rdquo;4&rdquo;，表示f1的第4行有变化</li>
-<li>中间的&rdquo;c&rdquo;表示变动的模式是内容改变（change），其他模式还有&rdquo;增加&rdquo;（a，代表addition）和&rdquo;删除&rdquo;（d，代表deletion）</li>
-<li>后面的&rdquo;4&rdquo;，表示变动后变成f2的第4行</li>
-</ul></li>
+<p>提供比 gzip 更高的压缩比。</p>
 
-<li><p>第二行：</p>
+<p>查看命令：bzcat、bzmore、bzless、bzgrep。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bzip2 <span style="color:#f92672">[</span>-cdkzv#<span style="color:#f92672">]</span> filename</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">-c ：将压缩的过程产生的数据输出到屏幕上！
+-d ：解压缩的参数
+-k ：保留原始文件，而不会删除原始的文件喔！
+-z ：压缩的参数 （默认值，可以不加）
+-v ：可以显示出原文件/压缩文件的压缩比等信息；
+-# ：与 gzip 同样的，都是在计算压缩比的参数， -9 最佳， -1 最快！</code></pre></div>
+<p>查看命令：bzcat/bzmore/bzless/bzgrep</p>
 
-<ul>
-<li>前面的小于号，表示要从f1当中去除该行（也就是第4行）</li>
-<li>后面的&rdquo;a&rdquo;表示该行的内容。</li>
-</ul></li>
+<h3 id="3-xz">3. xz</h3>
 
-<li><p>第三行：</p>
+<p>提供比 bzip2 更佳的压缩比。</p>
 
-<ul>
-<li>&mdash;用来分割f1和f2。</li>
-</ul></li>
+<p>可以看到，gzip、bzip2、xz 的压缩比不断优化。不过要注意的是，压缩比越高，压缩的时间也越长。</p>
 
-<li><p>第四行：</p>
+<p>查看命令：xzcat、xzmore、xzless、xzgrep。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xz <span style="color:#f92672">[</span>-dtlkc#<span style="color:#f92672">]</span> filename</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">选项与参数：
+-d ：就是解压缩啊！
+-t ：测试压缩文件的完整性，看有没有错误
+-l ：列出压缩文件的相关信息
+-k ：保留原本的文件不删除～
+-c ：同样的，就是将数据由屏幕上输出的意思！
+-# ：同样的，也有较佳的压缩比的意思！</code></pre></div>
+<p>查看命令：xzcat/xzmore/xzless/xzgrep</p>
 
-<ul>
-<li>前面的大于号表示f2增加了该行</li>
-<li>后面的&rdquo;b&rdquo;表示该行的内容。</li>
-</ul></li>
-</ul>
+<h2 id="打包指令tar">打包指令tar</h2>
 
-<h2 id="上下文格式diff">上下文格式diff</h2>
+<p>压缩指令只能对一个文件进行压缩，而打包能够将多个文件打包成一个大文件。tar 不仅可以用于打包，也可以使用 gip、bzip2、xz 将打包文件进行压缩。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tar <span style="color:#f92672">[</span>-z|-j|-J<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>cv<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-f 新建的 tar 文件<span style="color:#f92672">]</span> filename...  <span style="color:#f92672">==</span>打包压缩
+tar <span style="color:#f92672">[</span>-z|-j|-J<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>tv<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-f 已有的 tar 文件<span style="color:#f92672">]</span>              <span style="color:#f92672">==</span>查看
+tar <span style="color:#f92672">[</span>-z|-j|-J<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>xv<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-f 已有的 tar 文件<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-C 目录<span style="color:#f92672">]</span>    <span style="color:#f92672">==</span>解压缩
 
-<p>上个世纪80年代初，加州大学伯克利分校推出BSD版本的Unix时，觉得diff的显示结果太简单，最好加入上下文，便于了解发生的变动。因此，推出了上下文格式的diff。</p>
+选项与参数：
+-z ：通过 gzip 的支持进行压缩/解压缩：此时文件名最好为 *.tar.gz
+-j ：通过 bzip2 的支持进行压缩/解压缩：此时文件名最好为 *.tar.bz2
+-J ：通过 xz 的支持进行压缩/解压缩：此时文件名最好为 *.tar.xz
+-c ：新建打包文件；
+-t ：查看打包文件里面有哪些文件名；
+-x ：解打包或解压缩的功能,可以搭配 -C （大写） 在特定目录解开
+-v ：在压缩/解压缩的过程中，显示正在处理的文件名；
+-f : filename：要处理的文件；
+-C 目录 ： 在特定目录解压缩。
+-p（小写） ：保留备份数据的原本权限与属性，常用于备份（-c）重要的配置文件
+-P（大写） ：保留绝对路径，亦即允许备份数据中含有根目录存在之意；
+--exclude<span style="color:#f92672">=</span>FILE：在压缩的过程中，不要将 FILE 打包！</code></pre></div>
+<table>
+<thead>
+<tr>
+<th align="center">使用方式</th>
+<th>命令</th>
+</tr>
+</thead>
 
-<p>加入c参数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">zhaoxiaohu01@B000000399848t doc % diff -c f1.txt f2.txt
-*** f1.txt	2021-11-05 11:23:18.000000000 +0800
---- f2.txt	2021-11-05 11:23:58.000000000 +0800
-***************
-*** 1,7 ****
-  　　a
-  　　a
-  　　a
-! 　　a
-  　　a
-  　　a
-  　　a
---- 1,7 ----
-  　　a
-  　　a
-  　　a
-! 　　b
-  　　a
-  　　a
-  　　a</code></pre></div>
-<p>分成四个部分:</p>
+<tbody>
+<tr>
+<td align="center">打包压缩</td>
+<td>tar -jcv -f filename.tar.bz2 要被压缩的文件或目录名称</td>
+</tr>
 
-<ul>
-<li><p>第一部分：显示两个文件的基本情况：文件名和时间信息</p>
+<tr>
+<td align="center">查 看</td>
+<td>tar -jtv -f filename.tar.bz2</td>
+</tr>
 
-<ul>
-<li>***表示变动前的文件，&mdash;表示变动后的文件</li>
-</ul></li>
+<tr>
+<td align="center">解压缩</td>
+<td>tar -jxv -f filename.tar.bz2 -C 要解压缩的目录</td>
+</tr>
+</tbody>
+</table>
 
-<li><p>第二部分：15个星号，将文件的基本情况与变动内容分割开</p></li>
+<p><strong>使用tar压缩文件</strong></p>
 
-<li><p>第三部分：显示变动前的文件</p>
+<p>压缩当前文件夹下的文件夹test，压缩后缀名为test.tar.gz</p>
+<pre tabindex="0"><code>tar -zcvf test.tar.gz ./test/</code></pre>
+<p>如果不需要压缩成gz，只需要后缀为tar格式的，那么输入如下命令：</p>
+<pre tabindex="0"><code>tar -cvf test.tar ./test/</code></pre>
+<p><strong>使用tar解压文件</strong></p>
 
-<ul>
-<li><p>不仅显示发生变化的第4行，还显示第4行的前面三行和后面三行</p></li>
+<p>把后缀为.tar.gz的文件解压到当前文件夹下。</p>
+<pre tabindex="0"><code>tar -xzvf test.tar.gz  </code></pre>
+<p>如果压缩文件的后缀是.tar，没有gz，则使用命令:</p>
+<pre tabindex="0"><code>tar -xvf test.tar</code></pre>
+<p><strong>特定目录的解压缩动作 （ -C  选项的应用）</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> tar -jxv -f /root/etc.tar.bz2 -C /tmp</code></pre></div>
+<p><strong>使用 tar  加入 -z, -j  或 -J  的参数备份 /etc/  目录</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">time tar -zpcv -f /root/etc.tar.gz /etc
+<span style="color:#75715e"># 多了 time 会显示程序运行的时间！</span>
+<span style="color:#75715e"># 由于加上 -v 这个选项，因此正在作用中的文件名就会显示在屏幕上。</span>
+<span style="color:#75715e"># 至于 -p 的选项，重点在于“保留原本文件的权限与属性”之意。</span>
 
-<li><p>前面的&rdquo;** 1,7 **&ldquo;就表示，从第1行开始连续7行</p></li>
-
-<li><p>文件内容的每一行最前面，还有一个标记位</p></li>
-
-<li><p>如果为空，表示该行无变化</p></li>
-
-<li><p>如果是感叹号（!），表示该行有改动；如果是减号（-），表示该行被删除</p></li>
-
-<li><p>如果是加号（+），表示该行为新增</p></li>
-</ul></li>
-
-<li><p>第四部分：显示变动后的文件</p>
-
-<ul>
-<li>除了变动行（第4行）以外，也是上下文各显示三行，总共显示7行</li>
-</ul></li>
-</ul>
-
-<h2 id="合并格式diff">合并格式diff</h2>
-
-<p>如果两个文件相似度很高，那么上下文格式的diff，将显示大量重复的内容，很浪费空间。1990年，GNU diff率先推出了&rdquo;合并格式&rdquo;的diff，将f1和f2的上下文合并在一起显示。</p>
-
-<p>使用方法加入u参数</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">zhaoxiaohu01@B000000399848t doc % diff -u f1.txt f2.txt
---- f1.txt	2021-11-05 11:23:18.000000000 +0800
-+++ f2.txt	2021-11-05 11:23:58.000000000 +0800
-@@ -1,7 +1,7 @@
- 　　a
- 　　a
- 　　a
--　　a
-+　　b
- 　　a
- 　　a
- 　　a</code></pre></div>
-<p>分为三部分：</p>
-
-<ul>
-<li>第一部分：也是文件的基本信息
-
-<ul>
-<li>&mdash;表示变动前的文件</li>
-<li>+++表示变动后的文件</li>
-</ul></li>
-<li>第二部分：变动的位置用两个@作为起首和结束
-
-<ul>
-<li>前面的&rdquo;-1,7&rdquo;分成三个部分：减号表示第一个文件（即f1），&rdquo;1&rdquo;表示第1行，&rdquo;7&rdquo;表示连续7行</li>
-<li>&rdquo;+1,7&rdquo;表示变动后，成为第二个文件从第1行开始的连续7行</li>
-</ul></li>
-<li>第三部分：变动的具体内容
-
-<ul>
-<li>也是上下文各显示3行。它将两个文件的上下文，合并显示在一起，所以叫做&rdquo;合并格式&rdquo;。每一行最前面的标志位，空表示无变动，减号表示第一个文件删除的行，加号表示第二个文件新增的行</li>
-</ul></li>
-</ul>
-
-<h2 id="git格式diff">git格式diff</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">zhaoxiaohu01@B000000399848t doc % git diff f1.txt f2.txt
-diff --git a/f1.txt b/f2.txt
-index 08e4f18..8d187db <span style="color:#ae81ff">100644</span>
---- a/f1.txt
-+++ b/f2.txt
-@@ -1,7 +1,7 @@
- 　　a
- 　　a
- 　　a
--　　a
-+　　b
- 　　a
- 　　a
- 　　a</code></pre></div>
-<p>分为五部分：</p>
-
-<ul>
-<li>第一部分：表示结果为git格式的diff</li>
-<li>第二部分：表示两个版本的git哈希值（index区域的08e4f18对象，与工作目录区域的8d187db对象进行比较），最后的六位数字是对象的模式（普通文件，644权限）</li>
-<li>第三部分：表示进行比较的两个文件
-
-<ul>
-<li>&mdash;表示变动前的版本</li>
-<li>+++表示变动后的版本</li>
-</ul></li>
-<li>第四部分：变动的位置用两个@作为起首和结束
-
-<ul>
-<li>前面的&rdquo;-1,7&rdquo;分成三个部分：减号表示第一个文件（即f1），&rdquo;1&rdquo;表示第1行，&rdquo;7&rdquo;表示连续7行</li>
-<li>&rdquo;+1,7&rdquo;表示变动后，成为第二个文件从第1行开始的连续7行</li>
-</ul></li>
-<li>第五部分：变动的具体内容
-
-<ul>
-<li>也是上下文各显示3行。它将两个文件的上下文，合并显示在一起，所以叫做&rdquo;合并格式&rdquo;。每一行最前面的标志位，空表示无变动，减号表示第一个文件删除的行，加号表示第二个文件新增的行</li>
-</ul></li>
-</ul>
-
+time tar -jpcv -f /root/etc.tar.bz2 /etc
+time tar -Jpcv -f /root/etc.tar.xz /etc</code></pre></div>
 
                 
                 
@@ -521,15 +431,10 @@ index 08e4f18..8d187db <span style="color:#ae81ff">100644</span>
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/post/go/golang-%E5%86%85%E8%81%94%E7%BB%93%E6%9E%84%E4%BD%93/" data-toggle="tooltip" data-placement="top" title="Go语言基础之内联结构体">&larr;
+                        <a href="/post/go/go%E5%AE%9E%E7%8E%B0set/" data-toggle="tooltip" data-placement="top" title="Go实现set">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/post/go/go%E5%AE%9E%E7%8E%B0set/" data-toggle="tooltip" data-placement="top" title="Go实现set">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
                 
