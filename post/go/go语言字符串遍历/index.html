@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="linux——压缩与打包" />
-    <meta property="og:title" content="linux——压缩与打包" />
-    <meta property="twitter:title" content="linux——压缩与打包" />
+    <meta name="title" content="Go语言——字符串遍历" />
+    <meta property="og:title" content="Go语言——字符串遍历" />
+    <meta property="twitter:title" content="Go语言——字符串遍历" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="xiaohu Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>linux——压缩与打包-xiaohu的博客 | xiaohu Blog</title>
+    <title>Go语言——字符串遍历-xiaohu的博客 | xiaohu Blog</title>
 
-    <link rel="canonical" href="/post/linux/linux%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/">
+    <link rel="canonical" href="/post/go/go%E8%AF%AD%E8%A8%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%81%8D%E5%8E%86/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 
@@ -165,12 +165,12 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/linux" title="Linux">
-                            Linux
+                        <a class="tag" href="/tags/go" title="Go">
+                            Go
                         </a>
                         
                     </div>
-                    <h1>linux——压缩与打包</h1>
+                    <h1>Go语言——字符串遍历</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         
@@ -179,7 +179,7 @@
                                 xiaohu
                              
                             on 
-                            Wednesday, November 10, 2021
+                            Thursday, November 11, 2021
                             
                             
                             
@@ -207,183 +207,96 @@
                 
                 
 
-<h1 id="tar压缩与解压">tar压缩与解压</h1>
+<h1 id="字符串遍历">字符串遍历</h1>
 
-<h2 id="压缩文件名">压缩文件名</h2>
+<p>在go语言中支持两个字符类型，一个是byte(实际上是uint8的别名)，代表UTF-8字符串的单个字节的值，另一个是rune（为int32），代表单个Unicode字符。</p>
 
-<p>Linux 底下有很多压缩文件名，常见的如下：</p>
+<h3 id="utf-8遍历">utf-8遍历</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<table>
-<thead>
-<tr>
-<th>扩展名</th>
-<th>压缩程序</th>
-</tr>
-</thead>
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
 
-<tbody>
-<tr>
-<td>*.Z</td>
-<td>compress</td>
-</tr>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">str</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;Hello,世界&#34;</span>
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;len:&#34;</span>, len(<span style="color:#a6e22e">str</span>))
+    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; len(<span style="color:#a6e22e">str</span>); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+        <span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">str</span>[<span style="color:#a6e22e">i</span>]
+        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">ch</span>)
+    }
+}</code></pre></div>
+<p>每个中文字符在UTF-8中占3个字节，而不是1个字节</p>
 
-<tr>
-<td>*.zip</td>
-<td>zip</td>
-</tr>
+<p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">len</span>: <span style="color:#ae81ff">12</span>
+<span style="color:#ae81ff">72</span>
+<span style="color:#ae81ff">101</span>
+<span style="color:#ae81ff">108</span>
+<span style="color:#ae81ff">108</span>
+<span style="color:#ae81ff">111</span>
+<span style="color:#ae81ff">44</span>
+<span style="color:#ae81ff">228</span>
+<span style="color:#ae81ff">184</span>
+<span style="color:#ae81ff">150</span>
+<span style="color:#ae81ff">231</span>
+<span style="color:#ae81ff">149</span>
+<span style="color:#ae81ff">140</span></code></pre></div>
+<p>转化为字面值输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<tr>
-<td>*.gz</td>
-<td>gzip</td>
-</tr>
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+)
 
-<tr>
-<td>*.bz2</td>
-<td>bzip2</td>
-</tr>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">str</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;Hello,世界&#34;</span>
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;utf-8遍历  格式化打印&#34;</span>)
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">ch1</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">str</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%q&#34;</span>, <span style="color:#a6e22e">ch1</span>) <span style="color:#75715e">//单引号围绕的字符字面值，由go语法安全的转义
+</span><span style="color:#75715e"></span>	}
+}
+<span style="color:#75715e">//utf-8遍历  格式化打印
+</span><span style="color:#75715e">//&#39;H&#39;&#39;e&#39;&#39;l&#39;&#39;l&#39;&#39;o&#39;&#39;,&#39;&#39;世&#39;&#39;界&#39;% 
+</span></code></pre></div>
+<h3 id="unicode遍历">unicode遍历</h3>
 
-<tr>
-<td>*.xz</td>
-<td>xz</td>
-</tr>
+<p>以Unicode字符方式遍历时，每个字符的类型是rune，而不是byte。rune类型在go语言中占用四个字节</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<tr>
-<td>*.tar</td>
-<td>tar 程序打包的数据，没有经过压缩</td>
-</tr>
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
 
-<tr>
-<td>*.tar.gz</td>
-<td>tar 程序打包的文件，经过 gzip 的压缩</td>
-</tr>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">str</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;Hello,世界&#34;</span>
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">ch1</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">str</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">ch1</span>)
+	}
+}</code></pre></div>
+<p>输出：</p>
+<pre tabindex="0"><code>72
+101
+108
+108
+111
+44
+19990
+30028</code></pre>
+<p>转化为字面值输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<tr>
-<td>*.tar.bz2</td>
-<td>tar 程序打包的文件，经过 bzip2 的压缩</td>
-</tr>
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+)
 
-<tr>
-<td>*.tar.xz</td>
-<td>tar 程序打包的文件，经过 xz 的压缩</td>
-</tr>
-</tbody>
-</table>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">str</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;Hello,世界&#34;</span>
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;unicode遍历  转化输出格式&#34;</span>)
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">ch2</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">str</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(string(<span style="color:#a6e22e">ch2</span>))
+	}
+}
 
-<h2 id="压缩指令">压缩指令</h2>
-
-<h3 id="1-gzip">1. gzip</h3>
-
-<p>gzip 是 Linux 使用最广的压缩指令，可以解开 compress、zip 与 gzip 所压缩的文件。</p>
-
-<p>经过 gzip 压缩过，源文件就不存在了。</p>
-
-<p>有 9 个不同的压缩等级可以使用。</p>
-
-<p>可以使用 zcat、zmore、zless 来读取压缩文件的内容。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gzip <span style="color:#f92672">[</span>-cdtv#<span style="color:#f92672">]</span> filename
-
--c ：将压缩的数据输出到屏幕上
--d ：解压缩
--t ：检验压缩文件是否出错
--v ：显示压缩比等信息
--# ： <span style="color:#75715e"># 为数字的意思，代表压缩等级，数字越大压缩比越高，默认为 -6</span></code></pre></div>
-<h3 id="2-bzip2">2. bzip2</h3>
-
-<p>提供比 gzip 更高的压缩比。</p>
-
-<p>查看命令：bzcat、bzmore、bzless、bzgrep。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bzip2 <span style="color:#f92672">[</span>-cdkzv#<span style="color:#f92672">]</span> filename</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">-c ：将压缩的过程产生的数据输出到屏幕上！
--d ：解压缩的参数
--k ：保留原始文件，而不会删除原始的文件喔！
--z ：压缩的参数 （默认值，可以不加）
--v ：可以显示出原文件/压缩文件的压缩比等信息；
--# ：与 gzip 同样的，都是在计算压缩比的参数， -9 最佳， -1 最快！</code></pre></div>
-<p>查看命令：bzcat/bzmore/bzless/bzgrep</p>
-
-<h3 id="3-xz">3. xz</h3>
-
-<p>提供比 bzip2 更佳的压缩比。</p>
-
-<p>可以看到，gzip、bzip2、xz 的压缩比不断优化。不过要注意的是，压缩比越高，压缩的时间也越长。</p>
-
-<p>查看命令：xzcat、xzmore、xzless、xzgrep。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xz <span style="color:#f92672">[</span>-dtlkc#<span style="color:#f92672">]</span> filename</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">选项与参数：
--d ：就是解压缩啊！
--t ：测试压缩文件的完整性，看有没有错误
--l ：列出压缩文件的相关信息
--k ：保留原本的文件不删除～
--c ：同样的，就是将数据由屏幕上输出的意思！
--# ：同样的，也有较佳的压缩比的意思！</code></pre></div>
-<p>查看命令：xzcat/xzmore/xzless/xzgrep</p>
-
-<h2 id="打包指令tar">打包指令tar</h2>
-
-<p>压缩指令只能对一个文件进行压缩，而打包能够将多个文件打包成一个大文件。tar 不仅可以用于打包，也可以使用 gip、bzip2、xz 将打包文件进行压缩。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tar <span style="color:#f92672">[</span>-z|-j|-J<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>cv<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-f 新建的 tar 文件<span style="color:#f92672">]</span> filename...  <span style="color:#f92672">==</span>打包压缩
-tar <span style="color:#f92672">[</span>-z|-j|-J<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>tv<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-f 已有的 tar 文件<span style="color:#f92672">]</span>              <span style="color:#f92672">==</span>查看
-tar <span style="color:#f92672">[</span>-z|-j|-J<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>xv<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-f 已有的 tar 文件<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>-C 目录<span style="color:#f92672">]</span>    <span style="color:#f92672">==</span>解压缩
-
-选项与参数：
--z ：通过 gzip 的支持进行压缩/解压缩：此时文件名最好为 *.tar.gz
--j ：通过 bzip2 的支持进行压缩/解压缩：此时文件名最好为 *.tar.bz2
--J ：通过 xz 的支持进行压缩/解压缩：此时文件名最好为 *.tar.xz
--c ：新建打包文件；
--t ：查看打包文件里面有哪些文件名；
--x ：解打包或解压缩的功能,可以搭配 -C （大写） 在特定目录解开
--v ：在压缩/解压缩的过程中，显示正在处理的文件名；
--f : filename：要处理的文件；
--C 目录 ： 在特定目录解压缩。
--p（小写） ：保留备份数据的原本权限与属性，常用于备份（-c）重要的配置文件
--P（大写） ：保留绝对路径，亦即允许备份数据中含有根目录存在之意；
---exclude<span style="color:#f92672">=</span>FILE：在压缩的过程中，不要将 FILE 打包！</code></pre></div>
-<table>
-<thead>
-<tr>
-<th align="center">使用方式</th>
-<th>命令</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td align="center">打包压缩</td>
-<td>tar -jcv -f filename.tar.bz2 要被压缩的文件或目录名称</td>
-</tr>
-
-<tr>
-<td align="center">查 看</td>
-<td>tar -jtv -f filename.tar.bz2</td>
-</tr>
-
-<tr>
-<td align="center">解压缩</td>
-<td>tar -jxv -f filename.tar.bz2 -C 要解压缩的目录</td>
-</tr>
-</tbody>
-</table>
-
-<p><strong>使用tar压缩文件</strong></p>
-
-<p>压缩当前文件夹下的文件夹test，压缩后缀名为test.tar.gz</p>
-<pre tabindex="0"><code>tar -zcvf test.tar.gz ./test/</code></pre>
-<p>如果不需要压缩成gz，只需要后缀为tar格式的，那么输入如下命令：</p>
-<pre tabindex="0"><code>tar -cvf test.tar ./test/</code></pre>
-<p><strong>使用tar解压文件</strong></p>
-
-<p>把后缀为.tar.gz的文件解压到当前文件夹下。</p>
-<pre tabindex="0"><code>tar -xzvf test.tar.gz  </code></pre>
-<p>如果压缩文件的后缀是.tar，没有gz，则使用命令:</p>
-<pre tabindex="0"><code>tar -xvf test.tar</code></pre>
-<p><strong>特定目录的解压缩动作 （ -C  选项的应用）</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> tar -jxv -f /root/etc.tar.bz2 -C /tmp</code></pre></div>
-<p><strong>使用 tar  加入 -z, -j  或 -J  的参数备份 /etc/  目录</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">time tar -zpcv -f /root/etc.tar.gz /etc
-<span style="color:#75715e"># 多了 time 会显示程序运行的时间！</span>
-<span style="color:#75715e"># 由于加上 -v 这个选项，因此正在作用中的文件名就会显示在屏幕上。</span>
-<span style="color:#75715e"># 至于 -p 的选项，重点在于“保留原本文件的权限与属性”之意。</span>
-
-time tar -jpcv -f /root/etc.tar.bz2 /etc
-time tar -Jpcv -f /root/etc.tar.xz /etc</code></pre></div>
+<span style="color:#75715e">//unicode遍历  转化输出格式
+</span><span style="color:#75715e">//Hello,世界%
+</span></code></pre></div>
 
                 
                 
@@ -431,15 +344,10 @@ time tar -Jpcv -f /root/etc.tar.xz /etc</code></pre></div>
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/post/go/go%E5%AE%9E%E7%8E%B0set/" data-toggle="tooltip" data-placement="top" title="Go实现set">&larr;
+                        <a href="/post/linux/linux%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85/" data-toggle="tooltip" data-placement="top" title="linux——压缩与打包">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/post/go/go%E8%AF%AD%E8%A8%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%81%8D%E5%8E%86/" data-toggle="tooltip" data-placement="top" title="Go语言——字符串遍历">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
                 
