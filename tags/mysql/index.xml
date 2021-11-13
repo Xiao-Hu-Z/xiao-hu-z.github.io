@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mysql on Xiaou Blog</title>
+    <link>https://xiao-hu-z.github.io/tags/mysql/</link>
+    <description>Recent content in mysql on Xiaou Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mysql——常用指令</title>
+      <link>https://xiao-hu-z.github.io/post/mysql/mysql%E6%8C%87%E4%BB%A4/</link>
+      <pubDate>Fri, 12 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/mysql/mysql%E6%8C%87%E4%BB%A4/</guid>
+      <description>DML DML（data manipulation language）数据操纵语言，如：SELECT、UPDATE、INSERT、DELETE。 主要用来对数据库的数据进行一</description>
+    </item>
+    
+    <item>
+      <title>标签</title>
+      <link>https://xiao-hu-z.github.io/tags/</link>
+      <pubDate>Sun, 20 Oct 2019 17:12:25 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/tags/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Xiaou Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://xiao-hu-z.github.io/https://source.unsplash.com/random/1600x900?wallpapers">
+    <meta property="twitter:image" content="https://xiao-hu-z.github.io/https://source.unsplash.com/random/1600x900?wallpapers" />
+    
+
+    
+    <meta name="title" content="go——一文读懂sort排序" />
+    <meta property="og:title" content="go——一文读懂sort排序" />
+    <meta property="twitter:title" content="go——一文读懂sort排序" />
+    
+
+    
+    <meta name="description" content="这里是xiaohu的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="这里是xiaohu的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="这里是xiaohu的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="xiaohu Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>go——一文读懂sort排序-xiaohu的博客 | xiaohu Blog</title>
+
+    <link rel="canonical" href="/post/go/go-package%E4%B9%8Bsort/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Xiaou Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/archive/">ARCHIVE</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://cdn.jsdelivr.net/gh/Xiao-Hu-Z/blog-img@main/meinv/%e5%9b%be%e7%89%87.5fqlbz9z3b0g.png')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/go" title="Go">
+                            Go
+                        </a>
+                        
+                    </div>
+                    <h1>go——一文读懂sort排序</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                xiaohu
+                             
+                            on 
+                            Saturday, November 13, 2021
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                
+
+<h1 id="sort">sort</h1>
+
+<h3 id="sort简化函数">sort简化函数</h3>
+
+<p>直接使用sort.Sort函数对切片进行排序是比较繁琐的，sort包提供了简化函数，比如：sort.Ints、sort.Float64s和sort.Strings等</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Convenience wrappers for common cases
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Ints sorts a slice of ints in increasing order.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Ints</span>(<span style="color:#a6e22e">x</span> []<span style="color:#66d9ef">int</span>) { <span style="color:#a6e22e">Sort</span>(<span style="color:#a6e22e">IntSlice</span>(<span style="color:#a6e22e">x</span>)) }
+
+<span style="color:#75715e">// Float64s sorts a slice of float64s in increasing order.
+</span><span style="color:#75715e">// Not-a-number (NaN) values are ordered before other values.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Float64s</span>(<span style="color:#a6e22e">x</span> []<span style="color:#66d9ef">float64</span>) { <span style="color:#a6e22e">Sort</span>(<span style="color:#a6e22e">Float64Slice</span>(<span style="color:#a6e22e">x</span>)) }
+
+<span style="color:#75715e">// Strings sorts a slice of strings in increasing order.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Strings</span>(<span style="color:#a6e22e">x</span> []<span style="color:#66d9ef">string</span>) { <span style="color:#a6e22e">Sort</span>(<span style="color:#a6e22e">StringSlice</span>(<span style="color:#a6e22e">x</span>)) }</code></pre></div>
+<h3 id="sort-interface">Sort.Interface</h3>
+
+<p>Go还不支持<a href="http://mp.weixin.qq.com/s?__biz=MzIyNzM0MDk0Mg%3D%3D&amp;chksm=e863ecfadf1465ec883801f7296e48fa68999a0d1bb3f55095c91091a7859142a4072e28195a&amp;idx=1&amp;mid=2247486235&amp;scene=21&amp;sn=d0f80cb89099360a801603109e6ab0b6#wechat_redirect">泛型</a>。因此，为了支持<strong>任意元素类型</strong>的切片的排序，标准库sort包定义了一个Interface接口和一个接受该接口类型参数的Sort函数：</p>
+
+<p>接口有三个方法 <code>Len()</code> 、 <code>Less(i,j)</code> 和 <code>Swap(i,j)</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Interface</span> <span style="color:#66d9ef">interface</span> {
+	<span style="color:#75715e">// Len is the number of elements in the collection.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Len</span>() <span style="color:#66d9ef">int</span>
+
+	<span style="color:#75715e">// Less reports whether the element with index i
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// must sort before the element with index j.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// If both Less(i, j) and Less(j, i) are false,
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// then the elements at index i and j are considered equal.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Sort may place equal elements in any order in the final result,
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// while Stable preserves the original input order of equal elements.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Less must describe a transitive ordering:
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//  - if both Less(i, j) and Less(j, k) are true, then Less(i, k) must be true as well.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//  - if both Less(i, j) and Less(j, k) are false, then Less(i, k) must be false as well.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Note that floating-point comparison (the &lt; operator on float32 or float64 values)
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// is not a transitive ordering when not-a-number (NaN) values are involved.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// See Float64Slice.Less for a correct implementation for floating-point values.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Less</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span>
+
+	<span style="color:#75715e">// Swap swaps the elements with indexes i and j.
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Swap</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>)
+}</code></pre></div>
+<p>为了应用排序函数Sort，需要让被排序的切片类型实现<strong>sort.Interface</strong>接口，<code>sort</code>包下三个类型<code>IntSlice</code>、<code>Float64Slice</code>、<code>StringSlice</code>分别实现了三个方法，对应排序的是<code>[]int</code>、<code>[]float64</code>、<code>[]string</code>。若期望逆序排序，只需将对应的<code>Less</code>函数修改。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Convenience types for common cases
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// IntSlice attaches the methods of Interface to []int, sorting in increasing order.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IntSlice</span> []<span style="color:#66d9ef">int</span>
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#a6e22e">IntSlice</span>) <span style="color:#a6e22e">Len</span>() <span style="color:#66d9ef">int</span>           { <span style="color:#66d9ef">return</span> len(<span style="color:#a6e22e">x</span>) }
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#a6e22e">IntSlice</span>) <span style="color:#a6e22e">Less</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">i</span>] &lt; <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">j</span>] }
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#a6e22e">IntSlice</span>) <span style="color:#a6e22e">Swap</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>)      { <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">j</span>] = <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">j</span>], <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">i</span>] }
+
+<span style="color:#75715e">// Sort is a convenience method: x.Sort() calls Sort(x).
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#a6e22e">IntSlice</span>) <span style="color:#a6e22e">Sort</span>() { <span style="color:#a6e22e">Sort</span>(<span style="color:#a6e22e">x</span>) }
+
+<span style="color:#75715e">// Float64Slice implements Interface for a []float64, sorting in increasing order,
+</span><span style="color:#75715e">// with not-a-number (NaN) values ordered before other values.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Float64Slice</span> []<span style="color:#66d9ef">float64</span>
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#a6e22e">Float64Slice</span>) <span style="color:#a6e22e">Len</span>() <span style="color:#66d9ef">int</span> { <span style="color:#66d9ef">return</span> len(<span style="color:#a6e22e">x</span>) }
+
+<span style="color:#75715e">// Less reports whether x[i] should be ordered before x[j], as required by the sort Interface.
+</span><span style="color:#75715e">// Note that floating-point comparison by itself is not a transitive relation: it does not
+</span><span style="color:#75715e">// report a consistent ordering for not-a-number (NaN) values.
+</span><span style="color:#75715e">// This implementation of Less places NaN values before any others, by using:
+</span><span style="color:#75715e">//
+</span><span style="color:#75715e">//	x[i] &lt; x[j] || (math.IsNaN(x[i]) &amp;&amp; !math.IsNaN(x[j]))
+</span><span style="color:#75715e">//
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#a6e22e">Float64Slice</span>) <span style="color:#a6e22e">Less</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">i</span>] &lt; <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">j</span>] <span style="color:#f92672">||</span> (<span style="color:#a6e22e">isNaN</span>(<span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">i</span>]) <span style="color:#f92672">&amp;&amp;</span> !<span style="color:#a6e22e">isNaN</span>(<span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">j</span>])) }
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#a6e22e">Float64Slice</span>) <span style="color:#a6e22e">Swap</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>)      { <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">j</span>] = <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">j</span>], <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">i</span>] }
+
+<span style="color:#75715e">// isNaN is a copy of math.IsNaN to avoid a dependency on the math package.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">isNaN</span>(<span style="color:#a6e22e">f</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">bool</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">f</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">f</span>
+}
+
+<span style="color:#75715e">// Sort is a convenience method: x.Sort() calls Sort(x).
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#a6e22e">Float64Slice</span>) <span style="color:#a6e22e">Sort</span>() { <span style="color:#a6e22e">Sort</span>(<span style="color:#a6e22e">x</span>) }
+
+<span style="color:#75715e">// StringSlice attaches the methods of Interface to []string, sorting in increasing order.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">StringSlice</span> []<span style="color:#66d9ef">string</span>
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#a6e22e">StringSlice</span>) <span style="color:#a6e22e">Len</span>() <span style="color:#66d9ef">int</span>           { <span style="color:#66d9ef">return</span> len(<span style="color:#a6e22e">x</span>) }
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#a6e22e">StringSlice</span>) <span style="color:#a6e22e">Less</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">i</span>] &lt; <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">j</span>] }
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#a6e22e">StringSlice</span>) <span style="color:#a6e22e">Swap</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>)      { <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">j</span>] = <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">j</span>], <span style="color:#a6e22e">x</span>[<span style="color:#a6e22e">i</span>] }
+
+<span style="color:#75715e">// Sort is a convenience method: x.Sort() calls Sort(x).
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#a6e22e">StringSlice</span>) <span style="color:#a6e22e">Sort</span>() { <span style="color:#a6e22e">Sort</span>(<span style="color:#a6e22e">x</span>) }</code></pre></div>
+<p>也可以手动实现<code>sort</code>包的 <code>sort.Interface</code> 接口，来完成自定义排序。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;sort&#34;</span>
+)
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Person</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">Name</span>      <span style="color:#66d9ef">string</span> <span style="color:#75715e">// 姓名
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">Age</span>       <span style="color:#66d9ef">int</span>    <span style="color:#75715e">//　年龄
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">CreatedAt</span> <span style="color:#66d9ef">int64</span>  <span style="color:#75715e">// 记录时间
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#75715e">// 按照 Person.Age 从大到小排序
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">PersonSlice</span> []<span style="color:#a6e22e">Person</span>
+
+<span style="color:#75715e">// 重写 Len() 方法
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">PersonSlice</span>) <span style="color:#a6e22e">Len</span>() <span style="color:#66d9ef">int</span> {
+	<span style="color:#66d9ef">return</span> len(<span style="color:#a6e22e">p</span>)
+}
+
+<span style="color:#75715e">// 重写 Swap() 方法
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">PersonSlice</span>) <span style="color:#a6e22e">Swap</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) {
+	<span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">j</span>] = <span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">j</span>], <span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">i</span>]
+}
+
+<span style="color:#75715e">// 重写 Less() 方法
+</span><span style="color:#75715e">// 使用不同字段进行对比，并依此排序，这里用了Age，可以更换成CreatedAt进行排序的
+</span><span style="color:#75715e">// 使用 &lt; 从大到小排序，使用 &gt; 从小到大排序
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">PersonSlice</span>) <span style="color:#a6e22e">Less</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">j</span>].<span style="color:#a6e22e">Age</span> &lt; <span style="color:#a6e22e">p</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">Age</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">people1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Person</span>{
+		<span style="color:#a6e22e">Name</span>:      <span style="color:#e6db74">&#34;牛奔1&#34;</span>,
+		<span style="color:#a6e22e">Age</span>:       <span style="color:#ae81ff">18</span>,
+		<span style="color:#a6e22e">CreatedAt</span>: <span style="color:#ae81ff">1618667000</span>,
+	}
+	<span style="color:#a6e22e">people2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Person</span>{
+		<span style="color:#a6e22e">Name</span>:      <span style="color:#e6db74">&#34;牛奔2&#34;</span>,
+		<span style="color:#a6e22e">Age</span>:       <span style="color:#ae81ff">19</span>,
+		<span style="color:#a6e22e">CreatedAt</span>: <span style="color:#ae81ff">1618667100</span>,
+	}
+	<span style="color:#a6e22e">people3</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Person</span>{
+		<span style="color:#a6e22e">Name</span>:      <span style="color:#e6db74">&#34;牛奔3&#34;</span>,
+		<span style="color:#a6e22e">Age</span>:       <span style="color:#ae81ff">20</span>,
+		<span style="color:#a6e22e">CreatedAt</span>: <span style="color:#ae81ff">1618667200</span>,
+	}
+
+	<span style="color:#a6e22e">peopleSlice</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">PersonSlice</span>{}
+	<span style="color:#a6e22e">peopleSlice</span> = append(<span style="color:#a6e22e">peopleSlice</span>, <span style="color:#a6e22e">people2</span>, <span style="color:#a6e22e">people1</span>, <span style="color:#a6e22e">people3</span>)
+
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">peopleSlice</span>)
+
+	<span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Sort</span>(<span style="color:#a6e22e">PersonSlice</span>(<span style="color:#a6e22e">peopleSlice</span>)) <span style="color:#75715e">// 按照Age的逆序排序
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">peopleSlice</span>)
+
+	<span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Sort</span>(<span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Reverse</span>(<span style="color:#a6e22e">PersonSlice</span>(<span style="color:#a6e22e">peopleSlice</span>))) <span style="color:#75715e">// 按照Age的升序排序
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">peopleSlice</span>)
+}</code></pre></div>
+<h3 id="sort-slice">sort.Slice</h3>
+
+<p>对于自定义类型作为元素的切片，每次都得实现Interface接口的三个方法，比较麻烦，在Go 1.8版本中加入了<strong>sort.Slice</strong>函数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Slice sorts the slice x given the provided less function.
+</span><span style="color:#75715e">// It panics if x is not a slice.
+</span><span style="color:#75715e">//
+</span><span style="color:#75715e">// The sort is not guaranteed to be stable: equal elements
+</span><span style="color:#75715e">// may be reversed from their original order.
+</span><span style="color:#75715e">// For a stable sort, use SliceStable.
+</span><span style="color:#75715e">//
+</span><span style="color:#75715e">// The less function must satisfy the same requirements as
+</span><span style="color:#75715e">// the Interface type&#39;s Less method.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Slice</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">interface</span>{}, <span style="color:#a6e22e">less</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span>) {
+	<span style="color:#a6e22e">rv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">reflectValueOf</span>(<span style="color:#a6e22e">x</span>)
+	<span style="color:#a6e22e">swap</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">reflectSwapper</span>(<span style="color:#a6e22e">x</span>)
+	<span style="color:#a6e22e">length</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rv</span>.<span style="color:#a6e22e">Len</span>()
+	<span style="color:#a6e22e">quickSort_func</span>(<span style="color:#a6e22e">lessSwap</span>{<span style="color:#a6e22e">less</span>, <span style="color:#a6e22e">swap</span>}, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">length</span>, <span style="color:#a6e22e">maxDepth</span>(<span style="color:#a6e22e">length</span>))
+}</code></pre></div>
+<p>如果要进行稳定排序，则用sort.SliceStable替换上面的sort.Slice。</p>
+
+<p>eg:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// slice-sort-in-go/custom-type-slice-sort-in-go.go
+</span><span style="color:#75715e"></span> 
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Lang</span> <span style="color:#66d9ef">struct</span> {
+ <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span>
+ <span style="color:#a6e22e">Rank</span> <span style="color:#66d9ef">int</span>
+}
+ 
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+ <span style="color:#a6e22e">langs</span> <span style="color:#f92672">:=</span> []<span style="color:#a6e22e">Lang</span>{
+  {<span style="color:#e6db74">&#34;rust&#34;</span>, <span style="color:#ae81ff">2</span>},
+  {<span style="color:#e6db74">&#34;go&#34;</span>, <span style="color:#ae81ff">1</span>},
+  {<span style="color:#e6db74">&#34;swift&#34;</span>, <span style="color:#ae81ff">3</span>},
+ }
+ <span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Slice</span>(<span style="color:#a6e22e">langs</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">langs</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">Rank</span> &lt; <span style="color:#a6e22e">langs</span>[<span style="color:#a6e22e">j</span>].<span style="color:#a6e22e">Rank</span> })
+ <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%v\n&#34;</span>, <span style="color:#a6e22e">langs</span>) <span style="color:#75715e">// [{go 1} {rust 2} {swift 3}]
+</span><span style="color:#75715e"></span>}</code></pre></div>
+<h3 id="泛型">泛型</h3>
+
+<p>Go完整泛型实现将在Go1.18发布</p>
+
+<p>在泛型加入后，我们可以按如下方式对原生类型切片进行排序：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+ 
+<span style="color:#f92672">import</span> (
+ <span style="color:#e6db74">&#34;fmt&#34;</span>
+ <span style="color:#e6db74">&#34;sort&#34;</span>
+)
+ 
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Ordered</span> <span style="color:#66d9ef">interface</span> {
+ <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int8</span>, <span style="color:#66d9ef">int16</span>, <span style="color:#66d9ef">int32</span>, <span style="color:#66d9ef">int64</span>, <span style="color:#66d9ef">uint</span>, <span style="color:#66d9ef">uint8</span>, <span style="color:#66d9ef">uint16</span>, <span style="color:#66d9ef">uint32</span>, <span style="color:#66d9ef">uint64</span>, <span style="color:#66d9ef">uintptr</span>, <span style="color:#66d9ef">float32</span>, <span style="color:#66d9ef">float64</span>, <span style="color:#66d9ef">string</span>
+}
+ 
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">orderedSlice</span>[<span style="color:#a6e22e">T</span> <span style="color:#a6e22e">Ordered</span>] []<span style="color:#a6e22e">T</span>
+ 
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">orderedSlice</span>[<span style="color:#a6e22e">T</span>]) <span style="color:#a6e22e">Len</span>() <span style="color:#66d9ef">int</span>           { <span style="color:#66d9ef">return</span> len(<span style="color:#a6e22e">s</span>) }
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">orderedSlice</span>[<span style="color:#a6e22e">T</span>]) <span style="color:#a6e22e">Less</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>] &lt; <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">j</span>] }
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">orderedSlice</span>[<span style="color:#a6e22e">T</span>]) <span style="color:#a6e22e">Swap</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>)      { <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">j</span>] = <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">j</span>], <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>] }
+ 
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">OrderedSlice</span>[<span style="color:#a6e22e">T</span> <span style="color:#a6e22e">Ordered</span>](<span style="color:#a6e22e">s</span> []<span style="color:#a6e22e">T</span>) {
+ <span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Sort</span>(<span style="color:#a6e22e">orderedSlice</span>[<span style="color:#a6e22e">T</span>](<span style="color:#a6e22e">s</span>))
+}
+ 
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+ <span style="color:#a6e22e">s1</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">int32</span>{<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>}
+ <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">s1</span>) <span style="color:#75715e">// [3 5 2] 
+</span><span style="color:#75715e"></span> <span style="color:#a6e22e">OrderedSlice</span>(<span style="color:#a6e22e">s1</span>)
+ <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">s1</span>) <span style="color:#75715e">// [2 3 5]
+</span><span style="color:#75715e"></span> 
+ <span style="color:#a6e22e">s2</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;jim&#34;</span>, <span style="color:#e6db74">&#34;amy&#34;</span>, <span style="color:#e6db74">&#34;tom&#34;</span>}
+ <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">s2</span>) <span style="color:#75715e">// [jim amy tom]  
+</span><span style="color:#75715e"></span> <span style="color:#a6e22e">OrderedSlice</span>(<span style="color:#a6e22e">s2</span>)
+ <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">s2</span>) <span style="color:#75715e">// [amy jim tom] 
+</span><span style="color:#75715e"></span>}</code></pre></div>
+<p>上面的Ordered接口类型、orderedSlice[T]切片类型以及OrderdSlice函数都可能会内置到sort包中，我们直接使用sort.OrderSlice函数即可对原生类型元素切片进行排序。</p>
+
+<p>而对于自定义类型，如果我们将其加入到Ordered接口的类型列表(type list)中，像下面这样：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Lang</span> <span style="color:#66d9ef">struct</span> {
+ <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span>
+ <span style="color:#a6e22e">Rank</span> <span style="color:#66d9ef">int</span>
+}
+ 
+ 
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Ordered</span> <span style="color:#66d9ef">interface</span> {
+ <span style="color:#66d9ef">type</span> <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int8</span>, <span style="color:#66d9ef">int16</span>, <span style="color:#66d9ef">int32</span>, <span style="color:#66d9ef">int64</span>, <span style="color:#66d9ef">uint</span>, <span style="color:#66d9ef">uint8</span>, <span style="color:#66d9ef">uint16</span>, <span style="color:#66d9ef">uint32</span>, <span style="color:#66d9ef">uint64</span>, <span style="color:#66d9ef">uintptr</span>, <span style="color:#66d9ef">float32</span>, <span style="color:#66d9ef">float64</span>, <span style="color:#66d9ef">string</span>
+}</code></pre></div>
+<p>那么，当我们像下面代码这样对元素类型为Lang的切片langs进行排序时，我们会遇到编译错误：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+ <span style="color:#a6e22e">langs</span> <span style="color:#f92672">:=</span> []<span style="color:#a6e22e">Lang</span>{
+  {<span style="color:#e6db74">&#34;rust&#34;</span>, <span style="color:#ae81ff">2</span>},
+  {<span style="color:#e6db74">&#34;go&#34;</span>, <span style="color:#ae81ff">1</span>},
+  {<span style="color:#e6db74">&#34;swift&#34;</span>, <span style="color:#ae81ff">3</span>},
+ }
+ 
+ <span style="color:#a6e22e">OrderedSlice</span>(<span style="color:#a6e22e">langs</span>)
+ <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">langs</span>)
+}
+ 
+<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#a6e22e">prog</span>.<span style="color:#a6e22e">go2</span>:<span style="color:#ae81ff">20</span>:<span style="color:#ae81ff">55</span>: <span style="color:#a6e22e">cannot</span> <span style="color:#a6e22e">compare</span> <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>] &lt; <span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">j</span>] (<span style="color:#a6e22e">operator</span> &lt; <span style="color:#a6e22e">not</span> <span style="color:#a6e22e">defined</span> <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">T</span>)</code></pre></div>
+<p>由于Lang类型不支持&lt;<strong>比较，因此我们无法将Lang类型放入Ordered的类型列表中。而根本原因在于Go语言不支持运算符重载，这样我们永远无法让自定义类型支持</strong>&lt;<strong>和</strong>&gt;，我们只能另辟蹊径，采用sort.Slice的思路：额外提供一个比较函数！</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// https://go2goplay.golang.org/p/7K94ZJuaoDc
+</span><span style="color:#75715e"></span> 
+<span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+ 
+<span style="color:#f92672">import</span> (
+ <span style="color:#e6db74">&#34;fmt&#34;</span>
+ <span style="color:#e6db74">&#34;sort&#34;</span>
+)
+ 
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Lang</span> <span style="color:#66d9ef">struct</span> {
+ <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span>
+ <span style="color:#a6e22e">Rank</span> <span style="color:#66d9ef">int</span>
+}
+ 
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">sliceFn</span>[<span style="color:#a6e22e">T</span> <span style="color:#a6e22e">any</span>] <span style="color:#66d9ef">struct</span> {
+ <span style="color:#a6e22e">s</span>   []<span style="color:#a6e22e">T</span>
+ <span style="color:#a6e22e">cmp</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">T</span>, <span style="color:#a6e22e">T</span>) <span style="color:#66d9ef">bool</span>
+}
+ 
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">sliceFn</span>[<span style="color:#a6e22e">T</span>]) <span style="color:#a6e22e">Len</span>() <span style="color:#66d9ef">int</span>           { <span style="color:#66d9ef">return</span> len(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">s</span>) }
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">sliceFn</span>[<span style="color:#a6e22e">T</span>]) <span style="color:#a6e22e">Less</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">cmp</span>(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">j</span>]) }
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#a6e22e">sliceFn</span>[<span style="color:#a6e22e">T</span>]) <span style="color:#a6e22e">Swap</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span> <span style="color:#66d9ef">int</span>)      { <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">j</span>] = <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">j</span>], <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">s</span>[<span style="color:#a6e22e">i</span>] }
+ 
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SliceFn</span>[<span style="color:#a6e22e">T</span> <span style="color:#a6e22e">any</span>](<span style="color:#a6e22e">s</span> []<span style="color:#a6e22e">T</span>, <span style="color:#a6e22e">cmp</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">T</span>, <span style="color:#a6e22e">T</span>) <span style="color:#66d9ef">bool</span>) {
+ <span style="color:#a6e22e">sort</span>.<span style="color:#a6e22e">Sort</span>(<span style="color:#a6e22e">sliceFn</span>[<span style="color:#a6e22e">T</span>]{<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">cmp</span>})
+}
+ 
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+ <span style="color:#a6e22e">langs</span> <span style="color:#f92672">:=</span> []<span style="color:#a6e22e">Lang</span>{
+  {<span style="color:#e6db74">&#34;rust&#34;</span>, <span style="color:#ae81ff">2</span>},
+  {<span style="color:#e6db74">&#34;go&#34;</span>, <span style="color:#ae81ff">1</span>},
+  {<span style="color:#e6db74">&#34;swift&#34;</span>, <span style="color:#ae81ff">3</span>},
+ }
+ 
+ <span style="color:#a6e22e">SliceFn</span>(<span style="color:#a6e22e">langs</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">p1</span>, <span style="color:#a6e22e">p2</span> <span style="color:#a6e22e">Lang</span>) <span style="color:#66d9ef">bool</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">p1</span>.<span style="color:#a6e22e">Rank</span> &lt; <span style="color:#a6e22e">p2</span>.<span style="color:#a6e22e">Rank</span> })
+ <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">langs</span>) <span style="color:#75715e">// [{go 1} {rust 2} {swift 3}]
+</span><span style="color:#75715e"></span>}</code></pre></div>
+<p>有人说，SliceFn和非泛型版本的sort.Slice在使用时复杂度似乎也没啥差别啊。形式上的确如此，但内涵上还是有差别的。</p>
+
+<p>使用泛型方案， 由于少了到interface{}的装箱和拆箱操作，理论上SliceFn的性能要好于sort.Slice函数。根据Go语言之父Robert Griesemer对Go泛型的讲解：</p>
+
+<p>SliceFn(langs,&hellip;)</p>
+
+<p>等价于下面过程：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">sliceFnForLang</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">SliceFn</span>(<span style="color:#a6e22e">Lang</span>) <span style="color:#75715e">// 编译阶段，sliceFnForLang的函数原型为func(s []Lang, func(Lang, Lang) bool)；
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">sliceFnForLang</span>(<span style="color:#a6e22e">langs</span>) <span style="color:#75715e">// 运行阶段，和普通函数调用无异，但没有了到interface{}类型装箱和拆箱的损耗。
+</span></code></pre></div>
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="https://xiao-hu-z.github.io"><img src="/img/favicon.png" />Xiaou Blog</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%88%87%E7%89%87/" data-toggle="tooltip" data-placement="top" title="Go语言基础之切片">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+                
+
+
+<script src="https://utteranc.es/client.js"
+        repo="Xiao-Hu-Z/hugoblogtalks"
+        issue-term="pathname"
+        theme="github-light"  
+        crossorigin="anonymous"
+        async>
+</script>
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/git" title="git">
+                            git
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/go" title="go">
+                            go
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ral" title="ral">
+                            ral
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F" title="设计模式">
+                            设计模式
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Xiaou Blog" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:znxxhn@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/xiao-hu-z">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Xiaou Blog 2021
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+</body>
+</html>
