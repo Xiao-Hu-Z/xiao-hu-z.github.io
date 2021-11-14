@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="git &amp; icode" />
-    <meta property="og:title" content="git &amp; icode" />
-    <meta property="twitter:title" content="git &amp; icode" />
+    <meta name="title" content="一文读懂K线图" />
+    <meta property="og:title" content="一文读懂K线图" />
+    <meta property="twitter:title" content="一文读懂K线图" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="xiaohu Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>git &amp; icode-xiaohu的博客 | xiaohu Blog</title>
+    <title>一文读懂K线图-xiaohu的博客 | xiaohu Blog</title>
 
-    <link rel="canonical" href="/post/git/">
+    <link rel="canonical" href="/post/%E7%90%86%E8%B4%A2/k%E7%BA%BF%E5%9B%BE/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 
@@ -153,7 +153,7 @@
 
 <style type="text/css">
     header.intro-header {
-        background-image: url('https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg')
+        background-image: url('https://cdn.jsdelivr.net/gh/Xiao-Hu-Z/blog-img@main/blog%e8%83%8c%e6%99%af%e5%9b%be%e7%89%87/%e5%9b%be%e7%89%87.3stvht9rzha8.png')
     }
 </style>
 
@@ -165,12 +165,12 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/git" title="Git">
-                            Git
+                        <a class="tag" href="/tags/%E7%90%86%E8%B4%A2" title="理财">
+                            理财
                         </a>
                         
                     </div>
-                    <h1>git &amp; icode</h1>
+                    <h1>一文读懂K线图</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         
@@ -179,7 +179,7 @@
                                 xiaohu
                              
                             on 
-                            Saturday, October 9, 2021
+                            Sunday, November 14, 2021
                             
                             
                             
@@ -207,101 +207,90 @@
                 
                 
 
-<h1 id="git">Git</h1>
+<h1 id="k线图">K线图</h1>
 
-<p><img src="https://raw.githubusercontent.com/Xiao-Hu-Z/blog-img/master/git/Git常用命令速查表.png" alt="" /></p>
+<h3 id="k线图的起源">K线图的起源</h3>
 
-<h2 id="git的相关术语">Git的相关术语</h2>
+<p>K线图，又称蜡烛图、阴阳线，起源于日本 18 世纪的米市交易，用于计算米价每日的涨跌。因为它的标画方法有其独到之处，后续渐渐被人引入到股票、期货等证券市场的走势分析中。</p>
 
-<p><img src="https://raw.githubusercontent.com/Xiao-Hu-Z/blog-img/master/Go/image2020-8-26_15-52-14.png"/></p>
+<h3 id="k线图的组成">K线图的组成</h3>
+
+<p>K 线的四要素：开盘价、收盘价、最高价和最低价。它由不同粗细的影线和实体组成，细的称为“<strong>影线</strong>”，粗的称为“<strong>实体</strong>”。</p>
+
+<table>
+<thead>
+<tr>
+<th>阳线</th>
+<th>阴线</th>
+<th>十字线</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>红色、白色实体柱或黑框空心</td>
+<td>绿色、蓝色或黑色实体柱</td>
+<td>无实体</td>
+</tr>
+
+<tr>
+<td>收盘价&gt;开盘价</td>
+<td>收盘价&lt;开盘价</td>
+<td>收盘价=开盘价</td>
+</tr>
+
+<tr>
+<td>最高价=收盘价时，无上影线<br />最低价=开盘价时，无下影线</td>
+<td>最高价=开盘价时，无上影线<br />最低价=收盘价时，无下影线</td>
+<td>最高价=开/收盘价时，无上影线<br />最低价=开/收盘价时，无上下影线</td>
+</tr>
+</tbody>
+</table>
+
+<p>实体上方的影线被称为 “上影线”，下方的影线被称为 “下影线”。影线反映当天交易的最高价和最低价，实体则反映当天的开盘价和收盘价。开盘价低于收盘价的称为阳线，反之称为阴线，如果两者相等，则无实体，称为“十字线”。</p>
+
+<p><strong>阴阳反映股价的走势</strong>，阳线代表股价继续上涨，阴线代表股价继续下跌。因为股价涨跌是由买卖供求关系，即买卖双方的力量来决定的（买方多，股价就涨；卖方多，股价就跌），所以从 K线图上，我们也能看出买卖双方之间多番回合的较量。</p>
+
+<p><strong>实体的长短代表股价走向的力度</strong>，从中能看出买卖双方回合的胜负，实体越长（即开盘价和收盘价的价差越大），则上涨或下跌的趋势就越明显，例如在多数趋势明朗的行情中，实体都比较长，而震荡行情中，实体都较短。而趋势都存在一定的惯性，故从 K线的变化中也能分析出惯性是否快要结束，例如在趋势明朗的行情中，经历连续大阴或大阳以后出现了小阴或小阳，说明趋势可能会暂缓，进入调整状态；反之如果在震荡行情中，连续的小阴小阳以后出现了大阴大阳，说明震荡趋势可能结束，之后走势会稍见明朗。</p>
+
+<h3 id="k线的分类">K线的分类</h3>
 
 <ul>
-<li>工作区（workspace）</li>
+<li><p>根据<strong>计算周期</strong>，K 线可分为日K线、周K线、月K线、年K线等。周K线是根据周一开盘价、周五收盘价和全周最高价、全周最低价画出的K线图；月K线是根据一个月的第一个交易日的开盘价、最后一个交易日的收盘价和全月最高价、全月最低价画出的K线图，年K线同理。一般中长线投资者更关注周K线或月K线，而短线投资者更关注日K线的走势。</p></li>
+
+<li><p>根据<strong>描述对象</strong>，K 线可分为大盘K线和个股K线。如果大盘K线今日收阳(上涨)，而个股K线的阳线小于大盘K线，甚至收阴(下跌)，那说明个股弱于大盘的平均水平；如果大盘K线收阴，而个股K线的阴线小于大盘K线，甚至收阳，那说明个股强于大盘平均水平。</p></li>
 </ul>
 
-<p>程序员进行开发改动的地方，是你当前看到的，也是最新的。平常我们开发就是拷贝远程仓库中的一个分支，基于该分支进行开发。在开发过程中就是对工作区的操作。</p>
+<h3 id="常见k线图">常见K线图</h3>
+
+<h4 id="十字星">十字星</h4>
+
+<p>早晨十字星又称为希望之星，由3根K线组成，第一根是阴线，为下降趋势的继续。第二根是带上下影线的十字星，收盘价与开盘价持平。第三根是长阳线，第三根K线实体深入到第一根K线实体之内。阳线深入阴险实体部分越多，信号就越可靠。</p>
+
+<p>早晨十字星的技术含义是，股价经过大幅回落后，做空能量已大量释放，股价无力再创新低，呈现底部回升态势，这是表明显的转向信号。</p>
+
+<p><img src="https://pic3.zhimg.com/80/v2-228bb3c6bcc8c82130ef578a4a3a87e2_1440w.jpg" alt="img" /></p>
+
+<p>黄昏十字星是股价经过一段时期上涨后，出现向上跳空开盘，开盘价与收盘价相同或非常接近，而且留下上下影线，形成一颗“十字星”，接着第二天跳空拉出一根下跌的阴线，这就构成了黄昏十字星。</p>
+
+<p>黄昏十字星的技术含义：是黄昏十字星的出现表面股价已经见顶或离顶部不远，多方已无力维持当前的上涨趋势，股价将由强转弱，一轮跌势将不可避免。</p>
+
+<p><img src="https://pic4.zhimg.com/80/v2-3c7c35fb3cd399d43c8c39b5d30bb8cb_1440w.jpg" alt="img" /></p>
+
+<h4 id="光脚-vs-光头">光脚 VS 光头</h4>
+
+<p>光脚阳线是一种不带或带少许下影线的红实体。<a href="https://baike.baidu.com/item/开盘价/647769">开盘价</a>即成为全日<a href="https://baike.baidu.com/item/最低价/3071490">最低价</a>，开盘后，买方占据明显优势，股票价格不断盘升，表示上升势头很强，但在高价位处<a href="https://baike.baidu.com/item/多空双方/3902048">多空双方</a>有分歧，股价下跌，最终仍以阳线报收。总体来讲，出现先涨后跌型，买方力量占优，但实体部分与上影线长短差不多且<a href="https://baike.baidu.com/item/量能/5886012">量能</a>明显放大或缩小时，说明买方力量稍弱于卖方力量，购买时应<a href="https://baike.baidu.com/item/谨慎/1598675">谨慎</a>。</p>
 
 <ul>
-<li>暂存区(index)</li>
+<li><p>低位光脚阳线,一般来说，如果在低价位区域出现光脚阳线，且实体部分比<a href="https://baike.baidu.com/item/上影线">上影线</a>长，表明买方开始聚积上攻的能量，进行的第一次<a href="https://baike.baidu.com/item/试盘">试盘</a>。</p></li>
+
+<li><p>高位光脚阳线,如果在高价位区域出现光脚阳线，且实体部分比上影线短，表明买方上攻的能量开始衰竭，卖方的能量不断增强，<a href="https://baike.baidu.com/item/行情">行情</a>有可能在此发生逆转。</p></li>
 </ul>
 
-<p>.git目录下的index文件, 暂存区会记录 git add 添加文件的相关信息(文件名、大小、timestamp…)，不保存文件实体, 通过id指向每个文件实体。可以使用  git status  查看暂存区的状态。暂存区标记了你当前工作区中，哪些内容是被git管理的。当你完成某个需求或功能后需要提交到远程仓库，那么第一步就是通过 git  add 先提交到暂存区，被git管理。</p>
+<p>光头阳线是指没有<a href="https://baike.baidu.com/item/上影线">上影线</a>的K线</p>
 
 <ul>
-<li>本地仓库(repository)：</li>
-</ul>
-
-<p>保存了对象被提交 过的各个版本，比起工作区和暂存区的内容，它要更旧一些。git commit 后同步index的目录树到本地仓库，方便从下一步通过 git push 同步本地仓库与远程仓库的同步。</p>
-
-<ul>
-<li>远程仓库(remote)：</li>
-</ul>
-
-<p>远程仓库的内容可能被分布在多个地点的处于协作关系的本地仓库修改，因此它可能与本地仓库同步，也可能不同步，但是它的内容是最旧的。</p>
-
-<h2 id="git基本命令">Git基本命令</h2>
-
-<p>初次提交</p>
-<pre tabindex="0"><code>git add 文件
-git commit -m &#34;说明&#34;
-git push origin HEAD:refs/for/master</code></pre>
-<p>修改后提交</p>
-<pre tabindex="0"><code>git add 文件
-git commit --amend
-git push origin HEAD:refs/for/master</code></pre>
-<p>删除：</p>
-<pre tabindex="0"><code>git add/rm 文件
-git commit -m &#34;说明&#34;
-git push origin HEAD:refs/for/master</code></pre>
-<p>创建分支：git branch dev</p>
-
-<p>切换分支：git checkout dev</p>
-
-<p>创建并切换分支：git checkout -b dev</p>
-
-<p><strong>版本之间的diff</strong></p>
-
-<p>查看简单的diff结果，可以加上–stat参数，执行命令如下：</p>
-
-<blockquote>
-<pre tabindex="0"><code>&gt; git diff --stat
-&gt; ```
-
-比较上次提交commit和上上次提交的差别时，执行如下命令：
-
-&gt; ```
-&gt; git diff HEAD^ HEAD
-&gt; ```
-
-**查看创建的提交的更改信息**</code></pre>
-<p>git log</p>
-<pre tabindex="0"><code>拉去远端分支：git pull origin 分支名
-
-撤销已经被放入暂存区的文件：**git reset HEAD 文件**
-
-问题1：
-
-error: cannot pull with rebase: You have unstaged changes.
-
-error: please commit or stash them.</code></pre>
-<p>shell
-git stash #可用来暂存当前正在进行的工作
-git pull –rebase #在一个随机创建的分支上处理冲突，避免了直接污染原来的分区
-git stash pop #从Git栈中读取最近一次保存的内容
-```</p>
-</blockquote>
-
-<h1 id="icode">icode</h1>
-
-<p>注意点：</p>
-
-<ul>
-<li>上线后不能提代码，要先取消上线</li>
-<li>CR+2分后不能在原有的基础上继续提交代码，提交代码git commit -m &ldquo;卡片id&rdquo;</li>
-<li>CR+2分后会自动出发branch流水线</li>
-<li>没加final_commit，需要在change流水线手动触发xstp环境部署,false改为true</li>
-<li>qtest提测只需要执行一次</li>
-<li>上线时，首先观察版本diff</li>
+<li>光头阳线若出现在低价位区域，在<a href="https://baike.baidu.com/item/分时走势图/9366384">分时走势图</a>上表现为<a href="https://baike.baidu.com/item/股价探底/9166479">股价探底</a>后逐浪走高且<a href="https://baike.baidu.com/item/成交量/649336">成交量</a>同时放大，预示为一轮上升<a href="https://baike.baidu.com/item/行情/2010060">行情</a>的开始。如果出现在上升行情途中，表明后市继续看好。表示上涨主力强势。</li>
 </ul>
 
 
@@ -351,15 +340,10 @@ git stash pop #从Git栈中读取最近一次保存的内容
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/post/wangluo/http%E7%8A%B6%E6%80%81%E7%A0%81/" data-toggle="tooltip" data-placement="top" title="http状态码">&larr;
+                        <a href="/post/go/go-package%E4%B9%8Bsort/" data-toggle="tooltip" data-placement="top" title="go——一文读懂sort排序">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2018/04/16/using-helm-to-deploy-to-kubernetes/" data-toggle="tooltip" data-placement="top" title="Helm介绍">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
                 

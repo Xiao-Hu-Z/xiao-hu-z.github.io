@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>理财 on Xiaou Blog</title>
+    <link>https://xiao-hu-z.github.io/tags/%E7%90%86%E8%B4%A2/</link>
+    <description>Recent content in 理财 on Xiaou Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 14 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/%E7%90%86%E8%B4%A2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一文读懂K线图</title>
+      <link>https://xiao-hu-z.github.io/post/%E7%90%86%E8%B4%A2/k%E7%BA%BF%E5%9B%BE/</link>
+      <pubDate>Sun, 14 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/%E7%90%86%E8%B4%A2/k%E7%BA%BF%E5%9B%BE/</guid>
+      <description>K线图 K线图的起源 K线图，又称蜡烛图、阴阳线，起源于日本 18 世纪的米市交易，用于计算米价每日的涨跌。因为它的标画方法有其独到之处，后续渐渐被人</description>
+    </item>
+    
+    <item>
+      <title>标签</title>
+      <link>https://xiao-hu-z.github.io/tags/</link>
+      <pubDate>Sun, 20 Oct 2019 17:12:25 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/tags/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
