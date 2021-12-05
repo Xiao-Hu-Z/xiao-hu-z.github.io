@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>coding on Xiaou Blog</title>
+    <link>https://xiao-hu-z.github.io/tags/coding/</link>
+    <description>Recent content in coding on Xiaou Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 03 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/coding/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>链表中环的入口结点</title>
+      <link>https://xiao-hu-z.github.io/post/coding/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%8E%AF%E7%9A%84%E5%85%A5%E5%8F%A3%E7%BB%93%E7%82%B9-/</link>
+      <pubDate>Fri, 03 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/coding/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%8E%AF%E7%9A%84%E5%85%A5%E5%8F%A3%E7%BB%93%E7%82%B9-/</guid>
+      <description>描述 描述 给一个长度为n链表，若其中包含环，请找出该链表的环的入口结点，否则，返回null。 数据范围： $$n≤10000$$，1&amp;lt;=结点</description>
+    </item>
+    
+    <item>
+      <title>两个链表的第一个公共结点</title>
+      <link>https://xiao-hu-z.github.io/post/coding/%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E7%BB%93%E7%82%B9/</link>
+      <pubDate>Mon, 29 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/coding/%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E7%BB%93%E7%82%B9/</guid>
+      <description>描述 描述 输入两个无环的单向链表，找出它们的第一个公共结点，如果没有公共节点则返回空。（注意因为传入数据是链表，所以错误测试数据的提示是用其他</description>
+    </item>
+    
+    <item>
+      <title>合并两个排序链表</title>
+      <link>https://xiao-hu-z.github.io/post/coding/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8-/</link>
+      <pubDate>Mon, 29 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/coding/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8-/</guid>
+      <description>描述 输入两个递增的链表，单个链表的长度为n，合并这两个链表并使新链表中的节点仍然是递增排序的。 数据范围： 0≤n≤10000 ，−1000≤节点</description>
+    </item>
+    
+    <item>
+      <title>标签</title>
+      <link>https://xiao-hu-z.github.io/tags/</link>
+      <pubDate>Sun, 20 Oct 2019 17:12:25 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/tags/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -9,10 +9,10 @@
     <lastBuildDate>Sat, 09 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>git &amp; icode</title>
-      <link>https://xiao-hu-z.github.io/post/git/</link>
+      <link>https://xiao-hu-z.github.io/post/linux/git/</link>
       <pubDate>Sat, 09 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://xiao-hu-z.github.io/post/git/</guid>
+      <guid>https://xiao-hu-z.github.io/post/linux/git/</guid>
       <description>Git Git的相关术语 工作区（workspace） 程序员进行开发改动的地方，是你当前看到的，也是最新的。平常我们开发就是拷贝远程仓库中的一个分支</description>
     </item>
     

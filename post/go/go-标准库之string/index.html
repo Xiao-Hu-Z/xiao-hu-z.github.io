@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Xiaou Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://xiao-hu-z.github.io/https://source.unsplash.com/random/1600x900?wallpapers">
+    <meta property="twitter:image" content="https://xiao-hu-z.github.io/https://source.unsplash.com/random/1600x900?wallpapers" />
+    
+
+    
+    <meta name="title" content="go标准库——string" />
+    <meta property="og:title" content="go标准库——string" />
+    <meta property="twitter:title" content="go标准库——string" />
+    
+
+    
+    <meta name="description" content="这里是xiaohu的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="这里是xiaohu的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="这里是xiaohu的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="xiaohu Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>go标准库——string-xiaohu的博客 | xiaohu Blog</title>
+
+    <link rel="canonical" href="/post/go/go-%E6%A0%87%E5%87%86%E5%BA%93%E4%B9%8Bstring/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Xiaou Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/archive/">ARCHIVE</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://source.unsplash.com/random/1600x900?wallpapers')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/go" title="Go">
+                            Go
+                        </a>
+                        
+                    </div>
+                    <h1>go标准库——string</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                xiaohu
+                             
+                            on 
+                            Wednesday, December 1, 2021
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                
+
+<h1 id="子串">子串</h1>
+
+<ul>
+<li><p>是否存在某个字符或子串</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// 子串substr在s中，返回true
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Contains</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">substr</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">bool</span>
+<span style="color:#75715e">// chars中任何一个Unicode代码点在s中，返回true
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ContainsAny</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">chars</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">bool</span>
+<span style="color:#75715e">// Unicode代码点r在s中，返回true
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ContainsRune</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">r</span> <span style="color:#66d9ef">rune</span>) <span style="color:#66d9ef">bool</span></code></pre></div></li>
+
+<li><p>字符或子串在字符串中出现的位置</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//返回子串sep在字符串s中第一次出现的索引值，不在的话返回-1.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Index</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">sep</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">int</span>
+<span style="color:#75715e">//chars中任何一个Unicode代码点在s中首次出现的位置，不存在返回-1
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">IndexAny</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">chars</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">int</span>
+<span style="color:#75715e">//查找字符 c 在 s 中第一次出现的位置，其中 c 满足 f(c) 返回 true
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">IndexFunc</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">f</span> <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">rune</span>) <span style="color:#66d9ef">bool</span>) <span style="color:#66d9ef">int</span>   <span style="color:#75715e">//rune类型是int32别名，UTF-8字符格式编码。
+</span><span style="color:#75715e">//返回字符c在s中第一次出现的位置
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">IndexByte</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">c</span> <span style="color:#66d9ef">byte</span>) <span style="color:#66d9ef">int</span>   <span style="color:#75715e">//byte是字节类型
+</span><span style="color:#75715e">// Unicode 代码点 r 在 s 中第一次出现的位置
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">IndexRune</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">r</span> <span style="color:#66d9ef">rune</span>) <span style="color:#66d9ef">int</span>
+  
+<span style="color:#75715e">//查找最后一次出现的位置
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">LastIndex</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">sep</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">int</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">LastIndexByte</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">c</span> <span style="color:#66d9ef">byte</span>) <span style="color:#66d9ef">int</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">LastIndexAny</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">chars</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">int</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">LastIndexFunc</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">f</span> <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">rune</span>) <span style="color:#66d9ef">bool</span>) <span style="color:#66d9ef">int</span></code></pre></div></li>
+
+<li><p>子串出现次数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Count</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">sep</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">int</span>   <span style="color:#75715e">//子串在s字符串中出现的次数
+</span><span style="color:#75715e">//特别说明一下的是当 sep 为空时，Count 的返回值是：utf8.RuneCountInString(s) + 1
+</span><span style="color:#75715e">//Count 是计算子串在字符串中出现的无重叠的次数
+</span></code></pre></div></li>
+
+<li><p>字符串是否有某个前缀或后缀</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// s 中是否以 prefix 开始
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">HasPrefix</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">prefix</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">bool</span> {
+  <span style="color:#66d9ef">return</span> len(<span style="color:#a6e22e">s</span>) <span style="color:#f92672">&gt;=</span> len(<span style="color:#a6e22e">prefix</span>) <span style="color:#f92672">&amp;&amp;</span> &lt;<span style="color:#a6e22e">strong</span>&gt;&lt;<span style="color:#a6e22e">span</span> <span style="color:#a6e22e">style</span>=<span style="color:#e6db74">&#34;color:#ff0000;&#34;</span>&gt;<span style="color:#a6e22e">s</span>[<span style="color:#ae81ff">0</span>:len(<span style="color:#a6e22e">prefix</span>)]&lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">span</span>&gt;&lt;<span style="color:#f92672">/</span><span style="color:#a6e22e">strong</span>&gt; <span style="color:#f92672">==</span> <span style="color:#a6e22e">prefix</span>
+}
+<span style="color:#75715e">// s 中是否以 suffix 结尾
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">HasSuffix</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">suffix</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">bool</span> {
+  <span style="color:#66d9ef">return</span> len(<span style="color:#a6e22e">s</span>) <span style="color:#f92672">&gt;=</span> len(<span style="color:#a6e22e">suffix</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">s</span>[len(<span style="color:#a6e22e">s</span>)<span style="color:#f92672">-</span>len(<span style="color:#a6e22e">suffix</span>):] <span style="color:#f92672">==</span> <span style="color:#a6e22e">suffix</span>
+}</code></pre></div></li>
+
+<li><p>字符串转换</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ToUpper</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ToLower</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ToTitle</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span>
+  
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ToUpperSpecial</span>(<span style="color:#a6e22e">_case</span> <span style="color:#a6e22e">unicode</span>.<span style="color:#a6e22e">SpecialCase</span>, <span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ToLowerSpecial</span>(<span style="color:#a6e22e">_case</span> <span style="color:#a6e22e">unicode</span>.<span style="color:#a6e22e">SpecialCase</span>, <span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ToTitleSpecial</span>(<span style="color:#a6e22e">_case</span> <span style="color:#a6e22e">unicode</span>.<span style="color:#a6e22e">SpecialCase</span>, <span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span>
+  
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Title</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span></code></pre></div></li>
+
+<li><h1 id="比较">比较</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Compare</span>(<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">int</span>  <span style="color:#75715e">//返回不相等-1或者  相等0
+</span><span style="color:#75715e"></span>  
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">EqualFold</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">t</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">bool</span></code></pre></div></li>
+
+<li><h1 id="清理">清理</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Trim</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">cutset</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span>                 <span style="color:#75715e">//去除字符串的头尾子字符串
+</span><span style="color:#75715e">//把cutset里面的字符串拆分成字符，然后从左往右，逐个比对字符串中的每个字符，直到遇到没有在cutset中出现的字符。
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TrimLeft</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">cutset</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span>
+<span style="color:#75715e">//cutset里面的字符串拆分成字符，然后从右往左，逐个比对字符串中的每个字符，直到遇到没有在cutset中出现的字符
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TrimRight</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">cutset</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span>
+  
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TrimFunc</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">f</span> <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">rune</span>) <span style="color:#66d9ef">bool</span>) <span style="color:#66d9ef">string</span>         <span style="color:#75715e">//函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TrimLeftFunc</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">f</span> <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">rune</span>) <span style="color:#66d9ef">bool</span>) <span style="color:#66d9ef">string</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TrimRightFunc</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">f</span> <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">rune</span>) <span style="color:#66d9ef">bool</span>) <span style="color:#66d9ef">string</span>
+  
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TrimSpace</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span> <span style="color:#75715e">//字符串前后空格  fmt.Println(strings.TrimSpace(&#34; \t\n a lone gopher \n\t\r\n&#34;))  输出：a lone gopher
+</span><span style="color:#75715e"></span>  
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TrimPrefix</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">prefix</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TrimSuffix</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">suffix</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span></code></pre></div></li>
+
+<li><p>拆合函数</p></li>
+</ul>
+
+<p>Fields</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">  <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Fields</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) []<span style="color:#66d9ef">string</span>
+  <span style="color:#66d9ef">func</span> <span style="color:#a6e22e">FieldsFunc</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">f</span> <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">rune</span>) <span style="color:#66d9ef">bool</span>) []<span style="color:#66d9ef">string</span></code></pre></div>
+<p>Fields 用一个或多个连续的空格分隔字符串 s，返回子字符串的数组（slice）。如果字符串 s 只包含空格，则返回空列表([]string的长度为0）。其中，<strong>空格的定义是 unicode.IsSpace</strong>，之前已经介绍过。</p>
+
+<p>由于是用空格分隔，因此结果中不会含有空格或空子字符串。</p>
+
+<p>FieldsFunc 用这样的Unicode代码点 c 进行分隔：满足 f&copy; 返回 true。该函数返回[]string。如果字符串 s 中所有的代码点(unicode code  points)都满足f&copy;或者 s 是空，则 FieldsFunc 返回空slice。也就是说，我们可以通过实现一个回调函数来指定分隔字符串 s 的字符。</p>
+
+<h2 id="split">split</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Split</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">sep</span> <span style="color:#66d9ef">string</span>) []<span style="color:#66d9ef">string</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">genSplit</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">sep</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) }
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SplitAfter</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">sep</span> <span style="color:#66d9ef">string</span>) []<span style="color:#66d9ef">string</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">genSplit</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">sep</span>, len(<span style="color:#a6e22e">sep</span>), <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) }
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SplitN</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">sep</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) []<span style="color:#66d9ef">string</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">genSplit</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">sep</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">n</span>) }
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SplitAfterN</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">sep</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) []<span style="color:#66d9ef">string</span> { <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">genSplit</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">sep</span>, len(<span style="color:#a6e22e">sep</span>), <span style="color:#a6e22e">n</span>) }</code></pre></div>
+<h2 id="join">Join</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">a</span> []<span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">sep</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span></code></pre></div>
+<h2 id="replace">Replace</h2>
+
+<p>函数声明为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Replace</span>(<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">old</span>, <span style="color:#a6e22e">new</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">string</span>
+<span style="color:#75715e">//返回将s中前n个不重叠old子串都替换为new的新字符串，如果n&lt;0会替换所有old子串。
+</span></code></pre></div>
+<h1 id="数字和字符串转换">数字和字符串转换</h1>
+
+<h2 id="format类函数">Format类函数</h2>
+
+<p><strong>将给定类型格式化为string类型</strong>：FormatBool()、FormatFloat()、FormatInt()、FormatUint()。</p>
+<pre tabindex="0"><code>s := strconv.FormatBool(true)
+s := strconv.FormatFloat(3.1415, &#39;E&#39;, -1, 64)
+s := strconv.FormatInt(-42, 16)
+s := strconv.FormatUint(42, 16)</code></pre>
+<p>FormatInt()和FormatUint()有两个参数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">FormatInt</span>(<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">int64</span>, <span style="color:#a6e22e">base</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">string</span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">FormatUint</span>(<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">uint64</span>, <span style="color:#a6e22e">base</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">string</span></code></pre></div>
+<p>第二个参数base指定将第一个参数转换为多少进制，有效值为<code>2&lt;=base&lt;=36</code>。当指定的进制位大于10的时候，超出10的数值以a-z字母表示。例如16进制时，10-15的数字分别使用a-f表示，17进制时，10-16的数值分别使用a-g表示。</p>
+
+<p>例如：<code>FormatInt(-42, 16)</code>表示将-42转换为16进制数，转换的结果为-2a。</p>
+
+<p>FormatFloat()参数众多：</p>
+<pre tabindex="0"><code>func FormatFloat(f float64, fmt byte, prec, bitSize int) string</code></pre>
+<p>bitSize表示f的来源类型（32：float32、64：float64），会据此进行舍入。</p>
+
+<p>fmt表示格式：&rsquo;f&rsquo;（-ddd.dddd）、&rsquo;b&rsquo;（-ddddp±ddd，指数为二进制）、&rsquo;e&rsquo;（-d.dddde±dd，十进制指数）、&rsquo;E&rsquo;（-d.ddddE±dd，十进制指数）、&rsquo;g&rsquo;（指数很大时用&rsquo;e&rsquo;格式，否则&rsquo;f&rsquo;格式）、&rsquo;G&rsquo;（指数很大时用&rsquo;E&rsquo;格式，否则&rsquo;f&rsquo;格式）。</p>
+
+<p>prec控制精度（排除指数部分）：对&rsquo;f&rsquo;、&rsquo;e&rsquo;、&rsquo;E&rsquo;，它表示小数点后的数字个数；对&rsquo;g&rsquo;、&rsquo;G&rsquo;，它控制总的数字个数。如果prec 为-1，则代表使用最少数量的、但又必需的数字来表示f。</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="https://xiao-hu-z.github.io"><img src="/img/favicon.png" />Xiaou Blog</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" data-toggle="tooltip" data-placement="top" title="Go语言基础之输入输出">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/coding/%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%8E%AF%E7%9A%84%E5%85%A5%E5%8F%A3%E7%BB%93%E7%82%B9-/" data-toggle="tooltip" data-placement="top" title="链表中环的入口结点">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+
+<script src="https://utteranc.es/client.js"
+        repo="Xiao-Hu-Z/hugoblogtalks"
+        issue-term="pathname"
+        theme="github-light"  
+        crossorigin="anonymous"
+        async>
+</script>
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/coding" title="coding">
+                            coding
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/git" title="git">
+                            git
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/go" title="go">
+                            go
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/linux" title="linux">
+                            linux
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/mysql" title="mysql">
+                            mysql
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/ral" title="ral">
+                            ral
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E5%89%91%E6%8C%87offer" title="剑指offer">
+                            剑指offer
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E5%A5%A5%E5%88%A9%E7%BB%99" title="奥利给">
+                            奥利给
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E5%A8%B1%E4%B9%90" title="娱乐">
+                            娱乐
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/%E7%90%86%E8%B4%A2" title="理财">
+                            理财
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F" title="设计模式">
+                            设计模式
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Xiaou Blog" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:znxxhn@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/xiao-hu-z">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Xiaou Blog 2021
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+</body>
+</html>

@@ -6,7 +6,34 @@
     <description>Recent content in Go on Xiaou Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go语言基础——interface转struct</title>
+      <link>https://xiao-hu-z.github.io/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80interface%E8%BD%ACstruct/</link>
+      <pubDate>Sun, 05 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80interface%E8%BD%ACstruct/</guid>
+      <description>类型断言 package main import ( &amp;#34;encoding/json&amp;#34; &amp;#34;fmt&amp;#34; ) type user struct { Id int `json:&amp;#34;id&amp;#34;` Name string `json:&amp;#34;name&amp;#34;` } func main() { newUser:=user{ Id: 1, Name: &amp;#34;赵子龙&amp;#34;, } var newInterface1 interface{} //第一种使用interface newInterface1=newUser fmt.Pr</description>
+    </item>
+    
+    <item>
+      <title>go标准库——string</title>
+      <link>https://xiao-hu-z.github.io/post/go/go-%E6%A0%87%E5%87%86%E5%BA%93%E4%B9%8Bstring/</link>
+      <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/go/go-%E6%A0%87%E5%87%86%E5%BA%93%E4%B9%8Bstring/</guid>
+      <description>子串 是否存在某个字符或子串 // 子串substr在s中，返回true func Contains(s, substr string) bool // chars中任何一个Unicode代码点在s中，返回true func ContainsAny(s,</description>
+    </item>
+    
+    <item>
+      <title>Go语言基础之输入输出</title>
+      <link>https://xiao-hu-z.github.io/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/</link>
+      <pubDate>Mon, 29 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/go/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>go——一文读懂sort排序</title>
       <link>https://xiao-hu-z.github.io/post/go/go-package%E4%B9%8Bsort/</link>

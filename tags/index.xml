@@ -6,22 +6,58 @@
     <description>Recent content in Tags on Xiaou Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go</title>
+      <link>https://xiao-hu-z.github.io/tags/go/</link>
+      <pubDate>Sun, 05 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>coding</title>
+      <link>https://xiao-hu-z.github.io/tags/coding/</link>
+      <pubDate>Fri, 03 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/tags/coding/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>剑指offer</title>
+      <link>https://xiao-hu-z.github.io/tags/%E5%89%91%E6%8C%87offer/</link>
+      <pubDate>Fri, 03 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/tags/%E5%89%91%E6%8C%87offer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>奥利给</title>
+      <link>https://xiao-hu-z.github.io/tags/%E5%A5%A5%E5%88%A9%E7%BB%99/</link>
+      <pubDate>Tue, 23 Nov 2021 11:07:01 +0800</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/tags/%E5%A5%A5%E5%88%A9%E7%BB%99/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>理财</title>
       <link>https://xiao-hu-z.github.io/tags/%E7%90%86%E8%B4%A2/</link>
-      <pubDate>Sun, 14 Nov 2021 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 23 Nov 2021 11:07:01 +0800</pubDate>
       
       <guid>https://xiao-hu-z.github.io/tags/%E7%90%86%E8%B4%A2/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Go</title>
-      <link>https://xiao-hu-z.github.io/tags/go/</link>
-      <pubDate>Sat, 13 Nov 2021 00:00:00 +0000</pubDate>
+      <title>娱乐</title>
+      <link>https://xiao-hu-z.github.io/tags/%E5%A8%B1%E4%B9%90/</link>
+      <pubDate>Sun, 21 Nov 2021 11:07:01 +0800</pubDate>
       
-      <guid>https://xiao-hu-z.github.io/tags/go/</guid>
+      <guid>https://xiao-hu-z.github.io/tags/%E5%A8%B1%E4%B9%90/</guid>
       <description></description>
     </item>
     
@@ -67,24 +103,6 @@
       <pubDate>Tue, 19 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://xiao-hu-z.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Helm</title>
-      <link>https://xiao-hu-z.github.io/tags/helm/</link>
-      <pubDate>Sat, 09 Oct 2021 11:00:00 +0000</pubDate>
-      
-      <guid>https://xiao-hu-z.github.io/tags/helm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Kubernetes</title>
-      <link>https://xiao-hu-z.github.io/tags/kubernetes/</link>
-      <pubDate>Sat, 09 Oct 2021 11:00:00 +0000</pubDate>
-      
-      <guid>https://xiao-hu-z.github.io/tags/kubernetes/</guid>
       <description></description>
     </item>
     

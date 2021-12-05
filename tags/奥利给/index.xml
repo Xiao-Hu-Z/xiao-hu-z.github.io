@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>奥利给 on Xiaou Blog</title>
+    <link>https://xiao-hu-z.github.io/tags/%E5%A5%A5%E5%88%A9%E7%BB%99/</link>
+    <description>Recent content in 奥利给 on Xiaou Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Nov 2021 11:07:01 +0800</lastBuildDate><atom:link href="https://xiao-hu-z.github.io/tags/%E5%A5%A5%E5%88%A9%E7%BB%99/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>今日事今日毕</title>
+      <link>https://xiao-hu-z.github.io/post/dailytask/</link>
+      <pubDate>Tue, 23 Nov 2021 11:07:01 +0800</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/post/dailytask/</guid>
+      <description>dailyRun 千里之行始于足下，每日事，每日清，总结下如何增强执行力，大概有四条： 从最简单最容易的事情开始做起 评估做的事情会消耗我们自身多少资源 时刻提醒</description>
+    </item>
+    
+    <item>
+      <title>标签</title>
+      <link>https://xiao-hu-z.github.io/tags/</link>
+      <pubDate>Sun, 20 Oct 2019 17:12:25 +0000</pubDate>
+      
+      <guid>https://xiao-hu-z.github.io/tags/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
